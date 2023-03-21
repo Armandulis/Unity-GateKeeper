@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    Transform player;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        player = GameObject.FindWithTag( "Player" ).transform;
-    }
+    public Transform player;
+    public float smoothnes;
+    public Vector3 offset;
 
     // Update is called once per frame
-    void Update()
-    {
+    void FixedUpdate()
+    {     
         if(!player) return;
-        Vector2 tempPos = new Vector2( player.position.x, player.position.y );
-        transform.position = tempPos;
+        Vector3 newPosition = Vector3.Lerp( transform.position, player.position + offset, smoothnes );
+        // Vector2 tempPos = new Vector2( player.position.x, player.position.y );
+        transform.position = newPosition;
     }
 }
