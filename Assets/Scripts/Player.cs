@@ -19,12 +19,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw( "Horizontal" );
-        movement.y = Input.GetAxisRaw( "Vertical" );
+        if( playerMovementSpeed == 5 )
+        {
+           movement.x = Input.GetAxisRaw( "Horizontal" );
+           movement.y = Input.GetAxisRaw( "Vertical" );
+        }
     }
 
     void FixedUpdate() 
     {      
-        myRigidBody.MovePosition( myRigidBody.position + movement * playerMovementSpeed * Time.fixedDeltaTime );
+        myRigidBody.MovePosition( myRigidBody.position + movement.normalized * playerMovementSpeed * Time.fixedDeltaTime );
     }
 }
