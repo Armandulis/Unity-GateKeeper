@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5769593373825704416}
   - component: {fileID: 5769593373825704419}
   - component: {fileID: 6641707621463181980}
+  - component: {fileID: 1684671915}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -136,3 +137,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boltSpell: {fileID: 1906799557665476407, guid: df0742815f74f0b44bd73aa7e47b97d8, type: 3}
   spellSpeed: 10
+--- !u!70 &1684671915
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769593373825704420}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.15, y: 1.55}
+  m_Direction: 0
