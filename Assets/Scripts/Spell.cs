@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
+    bool hasUpgrade = false;
+    public int bounceChangePercentage = 50;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,21 @@ public class Spell : MonoBehaviour
         if( other.CompareTag( "Enemy" ) )
         {
             other.GetComponent<EnemyHealth>().TakeDamage( 10 );
+            int RandomValue = Random.Range(1, 101);
+            Debug.Log(RandomValue);
+            
+            Debug.Log(bounceChangePercentage);
+            Debug.Log(RandomValue < bounceChangePercentage);
+            if( RandomValue < bounceChangePercentage )
+            {
+                Vector2 randomDirection = Random.insideUnitCircle.normalized; // Generate a random direction vector
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.velocity = randomDirection * 10;
+                return;
+            }
+            
             Destroy( gameObject );
+            
         }
     }
 }
