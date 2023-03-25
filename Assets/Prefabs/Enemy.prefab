@@ -137,9 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33d81d4732338d1498e5db6838b1eb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 5922617148336662307, guid: b0d87666a8472f04bb8391d5a3757221, type: 3}
   currentHealth: 100
   maxHealth: 100
-  player: {fileID: 0}
+  player: {fileID: 5769593373825704420, guid: 6e8153389edb136459a850920ec11173, type: 3}
   myRigidBody: {fileID: 5130734999540426978}
 --- !u!114 &2881072456189996550
 MonoBehaviour:

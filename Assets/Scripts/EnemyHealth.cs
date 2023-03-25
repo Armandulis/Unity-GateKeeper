@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public GameObject inventory;
     public float currentHealth;
     public float maxHealth;
 
@@ -14,6 +15,8 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;    
+        
+        player = GameObject.FindGameObjectWithTag( "Player" );
 
 
     }
@@ -28,9 +31,6 @@ public class EnemyHealth : MonoBehaviour
     
     public void TakeDamage( float damage )
     {
-    
-
-
         currentHealth -= damage;
         CheckDeath();
     }
@@ -39,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if( currentHealth <= 0 )
         {
+            Instantiate( inventory, transform.position, Quaternion.identity );
             Destroy(gameObject);
         }
     }

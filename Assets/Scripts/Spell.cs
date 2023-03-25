@@ -23,10 +23,6 @@ public class Spell : MonoBehaviour
         {
             other.GetComponent<EnemyHealth>().TakeDamage( 10 );
             int RandomValue = Random.Range(1, 101);
-            Debug.Log(RandomValue);
-            
-            Debug.Log(bounceChangePercentage);
-            Debug.Log(RandomValue < bounceChangePercentage);
             if( RandomValue < bounceChangePercentage )
             {
                 Vector2 randomDirection = Random.insideUnitCircle.normalized; // Generate a random direction vector

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyInventory : MonoBehaviour
 {
-    public GameObject inventory;
 
     // Start is called before the first frame update
     void Start()
@@ -19,14 +18,6 @@ public class EnemyInventory : MonoBehaviour
     }
 
     private void OnDestroy() {
-        Instantiate( inventory, transform.position, Quaternion.identity );
-        Debug.Log("hello");
     }
     
-    private void OnTriggerEnter2D(Collider2D other) {
-        if( other.CompareTag( "Player" ) )
-        {
-            Debug.Log("HELLO");
-        }    
-    }
 }

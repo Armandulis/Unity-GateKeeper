@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - UICanvas
   layers:
   - Default
   - TransparentFX
@@ -54,6 +55,6 @@ TagManager:
   - name: Spells
     uniqueID: 1304221123
     locked: 0
-  - name: New Layer 5
+  - name: UI
     uniqueID: 4043507673
     locked: 0

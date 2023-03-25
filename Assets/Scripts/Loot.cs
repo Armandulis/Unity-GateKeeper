@@ -15,18 +15,17 @@ public class Loot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-                  if(Input.GetKeyDown( KeyCode.F ) && stayOnLoot)
+        Debug.Log( "stay on loot: " +  stayOnLoot);
+        if(Input.GetKeyDown( KeyCode.F ) && stayOnLoot)
            {
-
-
-        Instantiate( scroll, transform.position, Quaternion.identity );
+              Instantiate( scroll, transform.position, Quaternion.identity );
               Destroy( gameObject );
-            
            }
     }
 
     
     private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("WERE in");
         if( other.CompareTag( "Player" ) )
         {
             stayOnLoot = true;
@@ -40,14 +39,14 @@ public class Loot : MonoBehaviour
 
 
     private void OnTriggerExit2D(Collider2D other) {
-                stayOnLoot = false;
         if( other.CompareTag( "Player" ) )
         {
-                        if( transform.Find( "FTooltip" ) )
+             stayOnLoot = false;
+            if( transform.Find( "FTooltip" ) )
             {
                 Transform lootTooltipTransform = transform.Find( "FTooltip" ).transform;
                 lootTooltipTransform.localScale = new Vector3( 0, 0, 0 );
             }
-    }
+        }
     }
 }

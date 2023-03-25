@@ -5,6 +5,7 @@ using UnityEngine;
 public class CastSpell : MonoBehaviour
 {
     private bool hasMaxLevelBuff = false;
+
     public int spellLevel = 1;
 
     public float spellSize = 1;
@@ -17,12 +18,8 @@ public class CastSpell : MonoBehaviour
         CastDash();
     }
 
-
-
-
     private void CastbasicSpell()
     {
-
         int localLevel = spellLevel;
         if( hasMaxLevelBuff )
         {
@@ -39,7 +36,6 @@ public class CastSpell : MonoBehaviour
             if (localLevel > 1)
             {
                 CreateBolt( 10, directionMain );
-
             }
 
             if (localLevel > 2)

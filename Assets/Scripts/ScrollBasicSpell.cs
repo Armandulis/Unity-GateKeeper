@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScrollBasicSpell : MonoBehaviour
 {
+    public GameObject chooseSpellWindowObject;
+
     CastSpell spellCaster;
 
     // Start is called before the first frame update
@@ -17,9 +19,10 @@ public class ScrollBasicSpell : MonoBehaviour
     {
                     if( spellCaster && Input.GetKeyDown( KeyCode.F ) )
             {
-                spellCaster.spellLevel++;
-                Destroy(gameObject);
-            }
+            GameObject CanvasObject = GameObject.FindWithTag( "UICanvas" );
+            Instantiate(chooseSpellWindowObject, CanvasObject.transform);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
