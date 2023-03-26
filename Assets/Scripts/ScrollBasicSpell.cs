@@ -11,24 +11,24 @@ public class ScrollBasicSpell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-                    if( spellCaster && Input.GetKeyDown( KeyCode.F ) )
-            {
-            GameObject CanvasObject = GameObject.FindWithTag( "UICanvas" );
+        if (spellCaster && Input.GetKeyDown(KeyCode.F))
+        {
+            GameObject CanvasObject = GameObject.FindWithTag("UICanvas");
             Instantiate(chooseSpellWindowObject, CanvasObject.transform);
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.CompareTag( "Player" ) )
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
         {
-
             spellCaster = other.GetComponent<CastSpell>();
         }
     }

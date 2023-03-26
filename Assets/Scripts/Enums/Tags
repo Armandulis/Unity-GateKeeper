@@ -1,7 +1,4 @@
-namespace Enums
+public enum Tags
 {
-    public enum Tags
-    {
-        player
-    }
+    Player
 }

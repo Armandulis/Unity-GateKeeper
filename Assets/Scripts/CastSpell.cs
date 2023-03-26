@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class CastSpell : MonoBehaviour
 {
-    private bool hasMaxLevelBuff = false;
-
+    private HeroController heroController;
+    private GameManager gameManager;
     public int spellLevel = 1;
 
-    public float spellSize = 1;
     public GameObject boltSpell;
     public float spellSpeed;
+
+    private void Start() {    
+        gameManager = FindObjectOfType<GameManager>();
+        heroController = gameManager.heroController;
+    }
 
     void Update()
     {
@@ -20,12 +24,6 @@ public class CastSpell : MonoBehaviour
 
     private void CastbasicSpell()
     {
-        int localLevel = spellLevel;
-        if( hasMaxLevelBuff )
-        {
-            localLevel = 6;
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePositionMain = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -33,21 +31,21 @@ public class CastSpell : MonoBehaviour
             Vector2 directionMain = (mousePositionMain - myPositionMain).normalized;
             CreateBolt( 0, directionMain );
 
-            if (localLevel > 1)
+            if (heroController.basicAttackAmountLevel > 1)
             {
                 CreateBolt( 10, directionMain );
             }
 
-            if (localLevel > 2)
+            if (heroController.basicAttackAmountLevel > 2)
             {
                 CreateBolt( -10, directionMain );
             }
 
-            if (localLevel > 3)
+            if (heroController.basicAttackAmountLevel > 3)
             {
                 CreateBolt( 20, directionMain );
             }
-            if (localLevel > 4)
+            if (heroController.basicAttackAmountLevel > 4)
             {   
                 CreateBolt( -20, directionMain );
             }
@@ -60,30 +58,30 @@ public class CastSpell : MonoBehaviour
                 GameObject createdBoltSpell2 = Instantiate(boltSpell, transform.position, Quaternion.identity);
                 Vector2 direction2 = Quaternion.Euler(0, 0, offset) * directionMain; // Add a 10-degree offset to the original direction
                 createdBoltSpell2.GetComponent<Rigidbody2D>().velocity = direction2 * spellSpeed; // Use a slightly higher speed for the second spell
-                createdBoltSpell2.transform.localScale = new Vector3( spellSize, spellSize, spellSize );
+                createdBoltSpell2.transform.localScale = new Vector3( heroController.basicAttackSizeLevel, heroController.basicAttackSizeLevel, heroController.basicAttackSizeLevel );
     }
 
     private void CastDash()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            gameObject.GetComponent<Player>().playerMovementSpeed = 20;
+            heroController.currentmovementSpeed = heroController.maxSpeed;
             StartCoroutine(dashDuration());
 
             StartCoroutine( SpellUpgradeDuration( spellLevel ) );
-            hasMaxLevelBuff = true;
+            heroController.basicAttackAmountLevel = heroController.basicAttackAmountLevelMax;
         }
     }
 
     IEnumerator dashDuration()
     {
         yield return new WaitForSeconds(0.18f);
-        gameObject.GetComponent<Player>().playerMovementSpeed = 5;
+        heroController.currentmovementSpeed = heroController.basicMovementSpeed;
     }
 
     IEnumerator SpellUpgradeDuration( int originalLevel )
     {
-        yield return new WaitForSeconds(6);
-        hasMaxLevelBuff = false;
+        yield return new WaitForSeconds( 4 );
+        heroController.basicAttackAmountLevel = heroController.basicAttackAmountLevelLeveled;
     }
 }

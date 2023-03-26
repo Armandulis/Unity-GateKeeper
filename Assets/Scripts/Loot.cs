@@ -15,7 +15,6 @@ public class Loot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log( "stay on loot: " +  stayOnLoot);
         if(Input.GetKeyDown( KeyCode.F ) && stayOnLoot)
            {
               Instantiate( scroll, transform.position, Quaternion.identity );
@@ -25,7 +24,6 @@ public class Loot : MonoBehaviour
 
     
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("WERE in");
         if( other.CompareTag( "Player" ) )
         {
             stayOnLoot = true;

@@ -4,35 +4,41 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
-    bool hasUpgrade = false;
-    public int bounceChangePercentage = 50;
+    private HeroController heroController;
+    private int bounceChangePercentage = 0;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        heroController = gameManager.heroController;
+        bounceChangePercentage = heroController.CalculateBasicAttackBouncePersentage();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if( other.CompareTag( "Enemy" ) )
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyHealth>().TakeDamage( 10 );
+            other.GetComponent<Enemy>().TakeDamage(10);
             int RandomValue = Random.Range(1, 101);
-            if( RandomValue < bounceChangePercentage )
+            if (RandomValue < bounceChangePercentage)
             {
+                bounceChangePercentage -= 25;
                 Vector2 randomDirection = Random.insideUnitCircle.normalized; // Generate a random direction vector
                 Rigidbody2D rb = GetComponent<Rigidbody2D>();
                 rb.velocity = randomDirection * 10;
                 return;
             }
-            
-            Destroy( gameObject );
-            
+
+            Destroy(gameObject);
         }
     }
+
+
 }

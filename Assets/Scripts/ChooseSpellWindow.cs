@@ -5,8 +5,7 @@ using TMPro;
 
 public class ChooseSpellWindow : MonoBehaviour
 {
-
-    GameObject spellCaster;
+    private HeroController heroController;
     public TextMeshProUGUI FirstSpellText;
     public TextMeshProUGUI SecondSpellText;
     public TextMeshProUGUI ThirdSpellText;
@@ -14,11 +13,13 @@ public class ChooseSpellWindow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-          Time.timeScale = 0f;
-        spellCaster = GameObject.FindGameObjectWithTag( "Player" );
-        FirstSpellText.text = "Your basic attack will now launch" + (spellCaster.GetComponent<CastSpell>().spellLevel + 1) + "Bolts";
-        SecondSpellText.text = "Your basic attack will now increase in size by" + ((spellCaster.GetComponent<CastSpell>().spellSize +1) * 100) + "%";
-        // FirstSpellText.text = "Your basic attack will now launch" + (spellCaster.GetComponent<CastSpell>().spellLevel + 1) + "Bolts";
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        heroController = gameManager.heroController;
+
+        Time.timeScale = 0f;
+        FirstSpellText.text = "Your basic attack will now launch" + (heroController.basicAttackAmountLevelLeveled + 1) + "Bolts";
+        SecondSpellText.text = "Your basic attack will now increase in size by" + ((heroController.basicAttackSizeLevelLeveled +1) * 100) + "%";
+        ThirdSpellText.text = "Your basic attack will now bounce" + (heroController.basicAttackBounceLevelLeveled + 1) + "Bolts";
     }
 
     // Update is called once per frame
@@ -28,22 +29,26 @@ public class ChooseSpellWindow : MonoBehaviour
     }
 
     public void ChooseFirstSpell()
-    {
-        spellCaster.GetComponent<CastSpell>().spellLevel++;
+    {   
+        if( heroController.basicAttackAmountLevelLeveled == heroController.basicAttackAmountLevel ) heroController.basicAttackAmountLevel++;
+        heroController.basicAttackAmountLevelLeveled++;
         Time.timeScale = 1f;
         Destroy(gameObject);
     }
 
     public void ChooseSecondSpell()
     {
-        spellCaster.GetComponent<CastSpell>().spellSize++; 
+        
+        if( heroController.basicAttackSizeLevelLeveled == heroController.basicAttackSizeLevel ) heroController.basicAttackSizeLevel++;
+        heroController.basicAttackSizeLevelLeveled++;
         Time.timeScale = 1f;
          Destroy(gameObject);
     }
     
     public void ChooseThirdSpell()
     {
-        spellCaster.GetComponent<CastSpell>().spellLevel++;
+        if( heroController.basicAttackBounceLevelLeveled == heroController.basicAttackBounceLevel ) heroController.basicAttackBounceLevel++;
+         heroController.basicAttackBounceLevelLeveled++;
          Time.timeScale = 1f;
          Destroy(gameObject);
     }

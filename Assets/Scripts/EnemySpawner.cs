@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemy;
+    public EnemyController enemyController;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +24,9 @@ public class EnemySpawner : MonoBehaviour
     {
         while(true)
         {
-        yield return new WaitForSeconds( 10 );
-        Instantiate( enemy, transform.position, Quaternion.identity );
+            yield return new WaitForSeconds( 10 );
+            GameObject summonedEnemy = Instantiate( enemy, transform.position, Quaternion.identity );
+            summonedEnemy.GetComponent<Enemy>().enemyController = enemyController;
         }
     }
 }
