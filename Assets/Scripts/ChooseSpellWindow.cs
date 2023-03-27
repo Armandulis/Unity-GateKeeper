@@ -5,7 +5,7 @@ using TMPro;
 
 public class ChooseSpellWindow : MonoBehaviour
 {
-    private HeroController heroController;
+    private HeroStats heroStats;
     public TextMeshProUGUI FirstSpellText;
     public TextMeshProUGUI SecondSpellText;
     public TextMeshProUGUI ThirdSpellText;
@@ -14,12 +14,12 @@ public class ChooseSpellWindow : MonoBehaviour
     void Start()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
-        heroController = gameManager.heroController;
+        heroStats = gameManager.heroStats;
 
         Time.timeScale = 0f;
-        FirstSpellText.text = "Your basic attack will now launch" + (heroController.basicAttackAmountLevelLeveled + 1) + "Bolts";
-        SecondSpellText.text = "Your basic attack will now increase in size by" + ((heroController.basicAttackSizeLevelLeveled +1) * 100) + "%";
-        ThirdSpellText.text = "Your basic attack will now bounce" + (heroController.basicAttackBounceLevelLeveled + 1) + "Bolts";
+        FirstSpellText.text = "Your basic attack will now launch" + (heroStats.basicAttackAmountLevelLeveled + 1) + "Bolts";
+        SecondSpellText.text = "Your basic attack will now increase in size by" + ((heroStats.basicAttackSizeLevelLeveled +1) * 100) + "%";
+        ThirdSpellText.text = "Your basic attack will now bounce" + (heroStats.basicAttackBounceLevelLeveled + 1) * 25 + " percentage";
     }
 
     // Update is called once per frame
@@ -30,8 +30,8 @@ public class ChooseSpellWindow : MonoBehaviour
 
     public void ChooseFirstSpell()
     {   
-        if( heroController.basicAttackAmountLevelLeveled == heroController.basicAttackAmountLevel ) heroController.basicAttackAmountLevel++;
-        heroController.basicAttackAmountLevelLeveled++;
+        if( heroStats.basicAttackAmountLevelLeveled == heroStats.basicAttackAmountLevel ) heroStats.basicAttackAmountLevel++;
+        heroStats.basicAttackAmountLevelLeveled++;
         Time.timeScale = 1f;
         Destroy(gameObject);
     }
@@ -39,16 +39,16 @@ public class ChooseSpellWindow : MonoBehaviour
     public void ChooseSecondSpell()
     {
         
-        if( heroController.basicAttackSizeLevelLeveled == heroController.basicAttackSizeLevel ) heroController.basicAttackSizeLevel++;
-        heroController.basicAttackSizeLevelLeveled++;
+        if( heroStats.basicAttackSizeLevelLeveled == heroStats.basicAttackSizeLevel ) heroStats.basicAttackSizeLevel++;
+        heroStats.basicAttackSizeLevelLeveled++;
         Time.timeScale = 1f;
          Destroy(gameObject);
     }
     
     public void ChooseThirdSpell()
     {
-        if( heroController.basicAttackBounceLevelLeveled == heroController.basicAttackBounceLevel ) heroController.basicAttackBounceLevel++;
-         heroController.basicAttackBounceLevelLeveled++;
+        if( heroStats.basicAttackBounceLevelLeveled == heroStats.basicAttackBounceLevel ) heroStats.basicAttackBounceLevel++;
+         heroStats.basicAttackBounceLevelLeveled++;
          Time.timeScale = 1f;
          Destroy(gameObject);
     }

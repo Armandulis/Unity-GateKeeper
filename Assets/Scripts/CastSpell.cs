@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CastSpell : MonoBehaviour
 {
-    private HeroController heroController;
+    private HeroStats heroStats;
     private GameManager gameManager;
     public int spellLevel = 1;
 
@@ -13,7 +13,7 @@ public class CastSpell : MonoBehaviour
 
     private void Start() {    
         gameManager = FindObjectOfType<GameManager>();
-        heroController = gameManager.heroController;
+        heroStats = gameManager.heroStats;
     }
 
     void Update()
@@ -31,21 +31,21 @@ public class CastSpell : MonoBehaviour
             Vector2 directionMain = (mousePositionMain - myPositionMain).normalized;
             CreateBolt( 0, directionMain );
 
-            if (heroController.basicAttackAmountLevel > 1)
+            if (heroStats.basicAttackAmountLevel > 1)
             {
                 CreateBolt( 10, directionMain );
             }
 
-            if (heroController.basicAttackAmountLevel > 2)
+            if (heroStats.basicAttackAmountLevel > 2)
             {
                 CreateBolt( -10, directionMain );
             }
 
-            if (heroController.basicAttackAmountLevel > 3)
+            if (heroStats.basicAttackAmountLevel > 3)
             {
                 CreateBolt( 20, directionMain );
             }
-            if (heroController.basicAttackAmountLevel > 4)
+            if (heroStats.basicAttackAmountLevel > 4)
             {   
                 CreateBolt( -20, directionMain );
             }
@@ -58,30 +58,30 @@ public class CastSpell : MonoBehaviour
                 GameObject createdBoltSpell2 = Instantiate(boltSpell, transform.position, Quaternion.identity);
                 Vector2 direction2 = Quaternion.Euler(0, 0, offset) * directionMain; // Add a 10-degree offset to the original direction
                 createdBoltSpell2.GetComponent<Rigidbody2D>().velocity = direction2 * spellSpeed; // Use a slightly higher speed for the second spell
-                createdBoltSpell2.transform.localScale = new Vector3( heroController.basicAttackSizeLevel, heroController.basicAttackSizeLevel, heroController.basicAttackSizeLevel );
+                createdBoltSpell2.transform.localScale = new Vector3( heroStats.basicAttackSizeLevel, heroStats.basicAttackSizeLevel, heroStats.basicAttackSizeLevel );
     }
 
     private void CastDash()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            heroController.currentmovementSpeed = heroController.maxSpeed;
+            heroStats.currentmovementSpeed = heroStats.maxSpeed;
             StartCoroutine(dashDuration());
 
             StartCoroutine( SpellUpgradeDuration( spellLevel ) );
-            heroController.basicAttackAmountLevel = heroController.basicAttackAmountLevelMax;
+            heroStats.basicAttackAmountLevel = heroStats.basicAttackAmountLevelMax;
         }
     }
 
     IEnumerator dashDuration()
     {
         yield return new WaitForSeconds(0.18f);
-        heroController.currentmovementSpeed = heroController.basicMovementSpeed;
+        heroStats.currentmovementSpeed = heroStats.basicMovementSpeed;
     }
 
     IEnumerator SpellUpgradeDuration( int originalLevel )
     {
         yield return new WaitForSeconds( 4 );
-        heroController.basicAttackAmountLevel = heroController.basicAttackAmountLevelLeveled;
+        heroStats.basicAttackAmountLevel = heroStats.basicAttackAmountLevelLeveled;
     }
 }

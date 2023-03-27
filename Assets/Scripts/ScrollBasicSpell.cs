@@ -6,13 +6,7 @@ public class ScrollBasicSpell : MonoBehaviour
 {
     public GameObject chooseSpellWindowObject;
 
-    CastSpell spellCaster;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    private CastSpell spellCaster;
 
     // Update is called once per frame
     void Update()

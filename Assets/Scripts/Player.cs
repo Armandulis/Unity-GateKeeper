@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Player : MonoBehaviour
 {
-    private HeroController heroController;
+    private HeroStats heroStats;
     private GameManager gameManager;
 
     Vector2 movement;
@@ -15,13 +15,13 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
-        heroController = gameManager.heroController;
+        heroStats = gameManager.heroStats;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if( heroController.currentmovementSpeed < heroController.maxSpeed )
+        if( heroStats.currentmovementSpeed < heroStats.maxSpeed )
         {
            movement.x = Input.GetAxisRaw( "Horizontal" );
            movement.y = Input.GetAxisRaw( "Vertical" );
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() 
     {      
-        heroController = gameManager.heroController;
-        myRigidBody.MovePosition( myRigidBody.position + movement.normalized * heroController.currentmovementSpeed * Time.fixedDeltaTime );
+        heroStats = gameManager.heroStats;
+        myRigidBody.MovePosition( myRigidBody.position + movement.normalized * heroStats.currentmovementSpeed * Time.fixedDeltaTime );
     }
 }
