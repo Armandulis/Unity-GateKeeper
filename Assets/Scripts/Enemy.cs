@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
+    public Slider healthSlider;
+    public GameObject healthBar;
 
+    // public 
     public GameObject inventory;
 
     private GameObject player;
@@ -14,7 +17,6 @@ public class Enemy : MonoBehaviour
     
     public float maxHealth = 100;
     public float currentHelth = 100;
-    public Sprite sprite;
     public float speed;
 
     public Vector2 colliderSize;
@@ -24,10 +26,6 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-
-        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-        gameObject.GetComponent<CapsuleCollider2D>().size = colliderSize;
-        gameObject.GetComponent<CapsuleCollider2D>().offset = colliderOffset;
     }
 
     private void Update()
@@ -40,7 +38,9 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        healthBar.SetActive( true );
         currentHelth -= damage;
+        healthSlider.value = (currentHelth / maxHealth);
         CheckDeath();
     }
 
