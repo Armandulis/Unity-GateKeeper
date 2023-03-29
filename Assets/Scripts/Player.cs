@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     private HeroStats heroStats;
     private GameManager gameManager;
+
+    public Slider healthSlider;
 
     Vector2 movement;
 
@@ -14,7 +17,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
+        gameManager = GameManager.instance; 
         heroStats = gameManager.heroStats;
     }
 
@@ -32,5 +35,21 @@ public class Player : MonoBehaviour
     {      
         heroStats = gameManager.heroStats;
         myRigidBody.MovePosition( myRigidBody.position + movement.normalized * heroStats.currentmovementSpeed * Time.fixedDeltaTime );
+    }
+
+    public void PlayerTakeDamage(float damage)
+    {
+        heroStats.currentHealth -= damage;
+        healthSlider.value = heroStats.currentHealth / heroStats.maxHealth;
+
+        CheckDeath();
+    }
+
+    public void CheckDeath()
+    {
+        if (heroStats.currentHealth <= 0)
+        {
+            // TODO handle death
+        }
     }
 }

@@ -11,8 +11,8 @@ public class CastSpell : MonoBehaviour
     public GameObject boltSpell;
     public float spellSpeed;
 
-    private void Start() {    
-        gameManager = FindObjectOfType<GameManager>();
+    private void Start() {
+        gameManager = GameManager.instance;
         heroStats = gameManager.heroStats;
     }
 
