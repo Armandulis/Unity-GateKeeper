@@ -13,12 +13,21 @@ public class ChooseSpellWindow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        GameManager gameManager = GameManager.instance;
         heroStats = gameManager.heroStats;
 
         Time.timeScale = 0f;
-        FirstSpellText.text = "Your basic attack will now launch" + (heroStats.basicAttackAmountLevelLeveled + 1) + "Bolts";
-        SecondSpellText.text = "Your basic attack will now increase in size by" + ((heroStats.basicAttackSizeLevelLeveled +1) * 100) + "%";
+
+        if( heroStats.basicAttackAmountLevelLeveled >= heroStats.basicAttackAmountLevelMax )
+        {
+            Destroy(FirstSpellText.gameObject);
+        }
+        else
+        {
+FirstSpellText.text = "Your basic attack will now launch" + (heroStats.basicAttackAmountLevelLeveled + 1) + "Bolts";
+        
+        }
+            SecondSpellText.text = "Your basic attack will now increase in size by" + ((heroStats.basicAttackSizeLevelLeveled +1) * 100) + "%";
         ThirdSpellText.text = "Your basic attack will now bounce" + (heroStats.basicAttackBounceLevelLeveled + 1) * 25 + " percentage";
     }
 

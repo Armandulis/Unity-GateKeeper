@@ -8,6 +8,8 @@ public class ScrollBasicSpell : MonoBehaviour
 
     private CastSpell spellCaster;
 
+    public 
+
     // Update is called once per frame
     void Update()
     {

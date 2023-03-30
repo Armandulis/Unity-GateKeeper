@@ -10,8 +10,7 @@ public class Spell : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        heroStats = gameManager.heroStats;
+        heroStats = GameManager.instance.heroStats;
         bounceChangePercentage = heroStats.CalculateBasicAttackBouncePercentage();
     }
 
