@@ -50,6 +50,42 @@ public class CastSpell : MonoBehaviour
                 CreateBolt( -20, directionMain );
             }
         }
+
+        if( Input.GetKeyDown( KeyCode.E ) )
+        {
+            CastAOESpell();
+        }
+    }
+    private void CastAOESpell()
+    {
+        StartCoroutine( CastAOEPart() );
+    }
+
+    IEnumerator CastAOEPart()
+    {
+        Vector2 mousePositionMain = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 myPositionMain = transform.position;
+        Vector2 directionMain = (mousePositionMain - myPositionMain).normalized;
+
+        int castedCount = 0;
+        int lastOffsetTop = 0;
+        int lastOffsetBottom = 180;
+        int amount = 50;
+
+        while( castedCount < amount )
+        {
+            yield return new WaitForSeconds( 0.03f );
+
+             CreateBolt( lastOffsetTop , directionMain );
+             lastOffsetTop += 360 / amount;
+             castedCount++;  
+
+
+            CreateBolt( lastOffsetBottom , directionMain );
+            lastOffsetBottom += ( 360 / amount);
+            castedCount++; 
+             
+        }
     }
 
     private void CreateBolt( int offset, Vector2 directionMain )

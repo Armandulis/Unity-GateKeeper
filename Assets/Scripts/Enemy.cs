@@ -21,7 +21,9 @@ public class Enemy : MonoBehaviour
 
     public Vector2 colliderSize;
     public Vector2 colliderOffset;
-    
+
+    private bool coughtPlayer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,10 +32,18 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Vector2 playerPos = player.transform.position;
-        Vector2 myPosition = transform.position;
-        Vector2 direction = (playerPos - myPosition).normalized;
-        myRigidBody.velocity = direction * speed;
+        ChasePlayer();
+    }
+
+    private void ChasePlayer()
+    {
+        if( !coughtPlayer )
+        {
+            Vector2 playerPos = player.transform.position;
+            Vector2 myPosition = transform.position;
+            Vector2 direction = (playerPos - myPosition).normalized;
+            myRigidBody.velocity = direction * speed;
+        }
     }
 
     public void TakeDamage(float damage)
@@ -57,8 +67,40 @@ public class Enemy : MonoBehaviour
     {
         if( other.CompareTag( "Player" ) ) 
         {
-            other.GetComponent<Player>().PlayerTakeDamage( 5 );
+            
+            coughtPlayer = true;
+            StartCoroutine( DealDamage( other ) );
+            myRigidBody.velocity = Vector2.zero; 
+           
         }    
+    }
+
+    private IEnumerator DealDamage( Collider2D other )
+    {
+        
+        while( coughtPlayer )
+        {
+            
+            other.GetComponent<Player>().PlayerTakeDamage( 10 );
+            
+            yield return new WaitForSeconds( 1 );
+        }
+            yield return new WaitForSeconds( 1 );
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if( other.CompareTag( "Player" ) ) 
+        {
+            
+        // coughtPlayer = false;
+            StartCoroutine( StartChasingAgain() );
+        }   
+    }
+
+    private IEnumerator StartChasingAgain()
+    {
+        yield return new WaitForSeconds(2);
+        coughtPlayer = false;
     }
 
 
