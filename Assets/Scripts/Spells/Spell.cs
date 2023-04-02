@@ -18,7 +18,17 @@ public class Spell : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<Enemy>().TakeDamage(10);
+            Enemy enemy = other.GetComponent<Enemy>();
+            if( enemy )
+            {
+                enemy.TakeDamage(10);
+            }
+            else
+            {
+                SpellCasterEnemy spellCasterEnemy = other.GetComponent<SpellCasterEnemy>();
+                spellCasterEnemy.TakeDamage(10);
+            }
+
             int RandomValue = Random.Range(1, 101);
             if (RandomValue < bounceChangePercentage)
             {

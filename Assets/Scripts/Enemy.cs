@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
     {
         if (currentHelth <= 0)
         {
-            Instantiate(inventory, transform.position, Quaternion.identity);
+            // Instantiate(inventory, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

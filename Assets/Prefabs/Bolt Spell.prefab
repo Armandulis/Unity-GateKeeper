@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1906799557665476406}
   - component: {fileID: -1941849645657326428}
   - component: {fileID: 1063526314893695051}
-  - component: {fileID: -2373831598706928114}
+  - component: {fileID: 1807568619701988318}
   m_Layer: 0
   m_Name: Bolt Spell
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.16
---- !u!114 &-2373831598706928114
+--- !u!114 &1807568619701988318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,6 +133,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1906799557665476407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 819773ff7cad1934ea075573b042a354, type: 3}
+  m_Script: {fileID: 11500000, guid: e59d8eb343dd01d4182c7405fce73889, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
