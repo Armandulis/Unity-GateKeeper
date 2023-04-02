@@ -1,9 +1,16 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
+    public float currentMana = 500;
+    public float maxMana = 500;
+    public int manaRegen = 10;
+
+    public int healthRegen = 1;
+
     // Movement
     public int currentmovementSpeed = 5;
     public int basicMovementSpeed = 5;
@@ -18,6 +25,7 @@ public class HeroStats : MonoBehaviour
     public int basicAttackAmountLevel = 1;
     public int basicAttackAmountLevelMax = 6;
     public int basicAttackAmountLevelLeveled = 1;
+    public int basicAttackManaCost = 10;
 
     // Amount Size
     public int basicAttackSizeLevel = 1;
@@ -43,12 +51,41 @@ public class HeroStats : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine( ManaRegen() );
+        StartCoroutine( HealthRegen() );
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+           
+    }
+
+    private IEnumerator ManaRegen()
+    {
+        while( true )
+        {
+            yield return new WaitForSeconds( 1 );
+            currentMana += manaRegen;
+            if( currentMana + manaRegen > maxMana )
+            {
+                currentMana = maxMana;
+            }
+        }
+    }
+
+    private IEnumerator HealthRegen()
+    {
+        while( true )
+        {
+            yield return new WaitForSeconds( 1 );
+
+            currentHealth += healthRegen;
+            if( currentHealth + healthRegen > maxHealth )
+            {
+                currentHealth = maxHealth;
+            }
+        }
     }
 }

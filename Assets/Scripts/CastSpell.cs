@@ -20,12 +20,21 @@ public class CastSpell : MonoBehaviour
     {
         CastbasicSpell();
         CastDash();
+        
+        if( Input.GetKeyDown( KeyCode.E ) && heroStats.currentMana >= 30 )
+        {
+            
+            heroStats.currentMana -= 30;
+            CastAOESpell();
+        }
     }
 
     private void CastbasicSpell()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && heroStats.currentMana >= heroStats.basicAttackManaCost )
         {
+            heroStats.currentMana -= heroStats.basicAttackManaCost;
+
             Vector2 mousePositionMain = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 myPositionMain = transform.position;
             Vector2 directionMain = (mousePositionMain - myPositionMain).normalized;
@@ -51,10 +60,6 @@ public class CastSpell : MonoBehaviour
             }
         }
 
-        if( Input.GetKeyDown( KeyCode.E ) )
-        {
-            CastAOESpell();
-        }
     }
     private void CastAOESpell()
     {

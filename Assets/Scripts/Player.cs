@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
+    
+
     private HeroStats heroStats;
     private GameManager gameManager;
 
     public Slider healthSlider;
+    public Slider manaSlider;
 
     Vector2 movement;
 
@@ -24,6 +27,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float currentMana = heroStats.currentMana / heroStats.maxMana;
+        manaSlider.value = currentMana;
+
         if( heroStats.currentmovementSpeed < heroStats.maxSpeed )
         {
            movement.x = Input.GetAxisRaw( "Horizontal" );
@@ -32,9 +38,10 @@ public class Player : MonoBehaviour
     }
 
     void FixedUpdate() 
-    {      
+    {     
         heroStats = gameManager.heroStats;
         myRigidBody.MovePosition( myRigidBody.position + movement.normalized * heroStats.currentmovementSpeed * Time.fixedDeltaTime );
+
     }
 
     public void PlayerTakeDamage(float damage)
