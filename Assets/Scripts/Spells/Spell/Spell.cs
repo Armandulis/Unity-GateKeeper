@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Spell : MonoBehaviour
 {
-    private HeroStats heroStats;
+    private HeroManager heroManager;
     private int bounceChangePercentage = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        heroStats = GameManager.instance.heroStats;
-        bounceChangePercentage = heroStats.CalculateBasicAttackBouncePercentage();
+        heroManager = GameManager.instance.heroManager;
+        bounceChangePercentage = heroManager.GetHeroBasicSpellManager().CalculateBasicAttackBouncePercentage();
     }
 
     private void OnTriggerEnter2D(Collider2D other)

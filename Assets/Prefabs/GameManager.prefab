@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7392921062559102226}
   - component: {fileID: -2738125908778877066}
-  - component: {fileID: 226537111}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,30 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5530412da71e6e4a88ed88639aa1f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heroStats: {fileID: 0}
---- !u!114 &226537111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3296884408683472169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddcc8d34f8e62914986c9fd06d52045e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentmovementSpeed: 5
-  basicMovementSpeed: 5
-  maxSpeed: 20
-  currentHealth: 100
-  maxHealth: 100
-  basicAttackAmountLevel: 1
-  basicAttackAmountLevelMax: 6
-  basicAttackAmountLevelLeveled: 1
-  basicAttackSizeLevel: 1
-  basicAttackSizeLevelMax: 6
-  basicAttackSizeLevelLeveled: 1
-  basicAttackBounceLevel: 1
-  basicAttackBounceLevelMax: 6
-  basicAttackBounceLevelLeveled: 1
+  heroManager: {fileID: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
-    HeroStats heroStats;
+    HeroManager heroManager;
     public Slider healthSlider;
     public GameObject healthBar;
 
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         
-        heroStats = GameManager.instance.heroStats;
+        heroManager = GameManager.instance.heroManager;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -63,11 +63,9 @@ public class Enemy : MonoBehaviour
     {
         if (currentHelth <= 0)
         {
+        
+            heroManager.GetHeroLevelSystemManager().AddExperience( experienceWorth );
             
-        Debug.Log(experienceWorth);
-            Debug.Log( heroStats.basicAttackAmountLevel);
-            heroStats.levelSystem.AddExperience( experienceWorth );
-            // Instantiate(inventory, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

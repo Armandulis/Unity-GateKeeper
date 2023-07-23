@@ -5,20 +5,20 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public HeroStats heroStats;
+    public HeroManager heroManager;
 
+    
     private void Awake()
     {
+        
         if( instance == null )
         {
             instance = this;
-            heroStats = gameObject.GetComponent<HeroStats>();
+            heroManager = gameObject.GetComponent<HeroManager>();
             DontDestroyOnLoad( gameObject );
         }    
         else{
           Destroy(gameObject);
         }
-    }
-
-    
+    }    
 }

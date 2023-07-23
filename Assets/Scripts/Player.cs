@@ -1,18 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
-    
-
-    private HeroStats heroStats;
+    private HeroManager heroManager;
     private GameManager gameManager;
 
     public Slider healthSlider;
     public Slider manaSlider;
-
-    Vector2 movement;
 
     [SerializeField]
     private Rigidbody2D myRigidBody;
@@ -21,42 +15,36 @@ public class Player : MonoBehaviour
     void Start()
     {
         gameManager = GameManager.instance; 
-        heroStats = gameManager.heroStats;
+        heroManager = gameManager.heroManager;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float currentMana = heroStats.currentMana / heroStats.maxMana;
-        manaSlider.value = currentMana;
-
-        if( heroStats.currentmovementSpeed < heroStats.maxSpeed )
-        {
-           movement.x = Input.GetAxisRaw( "Horizontal" );
-           movement.y = Input.GetAxisRaw( "Vertical" );
-        }
+        manaSlider.value = heroManager.GetHeroManaManager().GetManaPercentage();
+        heroManager.GetHeroMovementManager().Move();
     }
 
-    void FixedUpdate() 
-    {     
-        heroStats = gameManager.heroStats;
-        myRigidBody.MovePosition( myRigidBody.position + movement.normalized * heroStats.currentmovementSpeed * Time.fixedDeltaTime );
-
+    void FixedUpdate()
+    {
+        // TODO Might need to reriece heroManager again
+        heroManager.GetHeroMovementManager().updateHeroPosition(
+            myRigidBody
+        );
     }
 
     public void PlayerTakeDamage(float damage)
     {
-        heroStats.currentHealth -= damage;
-        healthSlider.value = heroStats.currentHealth / heroStats.maxHealth;
-
-        CheckDeath();
+        heroManager.GetHeroHealthManager().TakeDamage( damage);
+        healthSlider.value = heroManager.GetHeroHealthManager().GetHealthPercentage();
     }
+
 
     public void CheckDeath()
     {
-        if (heroStats.currentHealth <= 0)
+        if(heroManager.GetHeroHealthManager().IsDead() )
         {
-            // TODO handle death
+            // DO SOMETHING
         }
     }
 }
