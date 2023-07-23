@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
+    HeroStats heroStats;
     public Slider healthSlider;
     public GameObject healthBar;
 
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     public Rigidbody2D myRigidBody;
 
-    
+
     public float maxHealth = 100;
     public float currentHelth = 100;
     public float speed;
@@ -24,9 +25,13 @@ public class Enemy : MonoBehaviour
 
     private bool coughtPlayer = false;
 
+    public int experienceWorth = 50;
+
     // Start is called before the first frame update
     void Start()
     {
+        
+        heroStats = GameManager.instance.heroStats;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -58,6 +63,10 @@ public class Enemy : MonoBehaviour
     {
         if (currentHelth <= 0)
         {
+            
+        Debug.Log(experienceWorth);
+            Debug.Log( heroStats.basicAttackAmountLevel);
+            heroStats.levelSystem.AddExperience( experienceWorth );
             // Instantiate(inventory, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
@@ -99,7 +108,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator StartChasingAgain()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         coughtPlayer = false;
     }
 

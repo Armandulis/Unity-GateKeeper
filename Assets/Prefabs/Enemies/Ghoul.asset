@@ -9,12 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c9856c9c0b6234c8dbde0679f75139, type: 3}
+  m_Script: {fileID: 11500000, guid: f386e14a83bbb5840a5762fe90260999, type: 3}
   m_Name: Ghoul
   m_EditorClassIdentifier: 
+  healthSlider: {fileID: 0}
+  healthBar: {fileID: 0}
+  inventory: {fileID: 0}
+  myRigidBody: {fileID: 0}
   maxHealth: 100
-  currentHelth: -40
-  sprite: {fileID: 21300000, guid: 5130b8902295dc14facc5d36f8b3aa06, type: 3}
-  speed: 7
-  colliderSize: {x: 1, y: 1}
+  currentHelth: 100
+  speed: 0
+  colliderSize: {x: 0, y: 0}
   colliderOffset: {x: 0, y: 0}
+  experienceWorth: 50

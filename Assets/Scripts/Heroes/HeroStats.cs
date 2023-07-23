@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
+    public LevelSystem levelSystem;
     public float currentMana = 500;
     public float maxMana = 500;
     public int manaRegen = 10;
@@ -36,6 +37,10 @@ public class HeroStats : MonoBehaviour
     public int basicAttackBounceLevel = 1;
     public int basicAttackBounceLevelMax = 6;
     public int basicAttackBounceLevelLeveled = 1;
+
+    public HeroStats() {
+        levelSystem = new LevelSystem();
+    }
     
     public int CalculateBasicAttackBouncePercentage()
     {
@@ -51,6 +56,10 @@ public class HeroStats : MonoBehaviour
         // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Constructor");
+        // levelSystem = new LevelSystem();
+        
+        Debug.Log(levelSystem.GetLevel());
         StartCoroutine( ManaRegen() );
         StartCoroutine( HealthRegen() );
 
