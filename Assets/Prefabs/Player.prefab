@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5769593373825704421}
   - component: {fileID: 5769593373825704416}
   - component: {fileID: 5769593373825704419}
-  - component: {fileID: 6641707621463181980}
   - component: {fileID: 1684671915}
   m_Layer: 0
   m_Name: Player
@@ -122,22 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 0}
+  manaSlider: {fileID: 0}
   myRigidBody: {fileID: 5769593373825704416}
---- !u!114 &6641707621463181980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5769593373825704420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cf2ecb9e05d25c4986466affddc7eee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellLevel: 1
-  boltSpell: {fileID: 1906799557665476407, guid: df0742815f74f0b44bd73aa7e47b97d8, type: 3}
-  spellSpeed: 10
 --- !u!70 &1684671915
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

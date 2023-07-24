@@ -6,10 +6,9 @@ public class SpellCastManager : MonoBehaviour
 {
     private HeroManager heroManager;
     private GameManager gameManager;
-    public int spellLevel = 1;
 
     public GameObject boltSpell;
-    public float spellSpeed;
+    private float spellSpeed = 10;
 
     private void Start() {
         gameManager = GameManager.instance;
@@ -18,9 +17,9 @@ public class SpellCastManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && heroManager.GetHeroMovementManager().CanDash() )
         {
-            // TODO add dash
+            StartCoroutine( heroManager.GetHeroMovementManager().Dash( ) );
         }
         CastbasicSpell();
         
@@ -99,7 +98,7 @@ public class SpellCastManager : MonoBehaviour
     private void CreateBolt( int offset, Vector2 directionMain )
     {
         // Create the second spell
-        GameObject createdBoltSpell2 = Instantiate(boltSpell, transform.position, Quaternion.identity);
+        GameObject createdBoltSpell2 = Instantiate(original: boltSpell, transform.position, Quaternion.identity);
         Vector2 direction2 = Quaternion.Euler(0, 0, offset) * directionMain; // Add a 10-degree offset to the original direction
         createdBoltSpell2.GetComponent<Rigidbody2D>().velocity = direction2 * spellSpeed; // Use a slightly higher speed for the second spell
         int size = heroManager.GetHeroBasicSpellManager().GetSpellSize();

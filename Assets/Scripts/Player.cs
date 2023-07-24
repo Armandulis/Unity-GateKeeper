@@ -23,19 +23,17 @@ public class Player : MonoBehaviour
     {
         manaSlider.value = heroManager.GetHeroManaManager().GetManaPercentage();
         heroManager.GetHeroMovementManager().Move();
+        heroManager.GetHeroMovementManager().Dash();
     }
 
     void FixedUpdate()
     {
-        // TODO Might need to reriece heroManager again
-        heroManager.GetHeroMovementManager().updateHeroPosition(
-            myRigidBody
-        );
+        heroManager.GetHeroMovementManager().updateHeroPosition(myRigidBody);
     }
 
     public void PlayerTakeDamage(float damage)
     {
-        heroManager.GetHeroHealthManager().TakeDamage( damage);
+        heroManager.GetHeroHealthManager().TakeDamage( damage); 
         healthSlider.value = heroManager.GetHeroHealthManager().GetHealthPercentage();
     }
 

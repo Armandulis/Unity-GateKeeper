@@ -10,6 +10,14 @@ public class HeroManager : MonoBehaviour
     private HeroLevelSystemManager heroLevelSystemManager;
     private HeroBasicSpellManager heroBasicSpellManager;
 
+    private void Awake()
+    {
+        heroHealthManager = new HeroHealthManager();
+        heroManaManager = new HeroManaManager();
+        heroMovementManager = new HeroMovementManager();
+        heroLevelSystemManager = new HeroLevelSystemManager();
+        heroBasicSpellManager = new HeroBasicSpellManager();
+    }    
 
     void Start()
     {
