@@ -28560,7 +28560,6 @@ GameObject:
   m_Component:
   - component: {fileID: 341079466}
   - component: {fileID: 341079467}
-  - component: {fileID: 341079468}
   m_Layer: 5
   m_Name: SkillTree
   m_TagString: Untagged
@@ -28636,18 +28635,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &341079468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 341079465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e7cecdce629044b80d6d3496780a5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &415716052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5769593373825704418, guid: 6e8153389edb136459a850920ec11173, type: 3}
@@ -28869,24 +28856,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &807204766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8246283345249862846, guid: 5f9c8b3d8f6b2624bb751dbbe7ed3075, type: 3}
-  m_PrefabInstance: {fileID: 8246283346301733065}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &807204770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807204766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd1f92a23009563488df876c88bc866b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boltSpell: {fileID: 1906799557665476407, guid: df0742815f74f0b44bd73aa7e47b97d8, type: 3}
 --- !u!1 &961283649
 GameObject:
   m_ObjectHideFlags: 0
@@ -29048,7 +29017,6 @@ GameObject:
   - component: {fileID: 1300899623}
   - component: {fileID: 1300899622}
   - component: {fileID: 1300899621}
-  - component: {fileID: 1300899620}
   m_Layer: 5
   m_Name: ManaRegenSkillPoint
   m_TagString: Untagged
@@ -29077,18 +29045,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.33, y: 1.77}
   m_SizeDelta: {x: 2.7362, y: 2.369}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1300899620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300899618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e7cecdce629044b80d6d3496780a5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1300899621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29133,9 +29089,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 341079468}
+      - m_Target: {fileID: 2116509212}
         m_TargetAssemblyTypeName: SkillTree, Assembly-CSharp
-        m_MethodName: ManaRegenTalent
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
