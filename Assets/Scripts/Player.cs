@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Rigidbody2D myRigidBody;
 
+    public GameObject skillTree;
+
+    private bool talentsOpened;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,12 @@ public class Player : MonoBehaviour
         manaSlider.value = heroManager.GetHeroManaManager().GetManaPercentage();
         heroManager.GetHeroMovementManager().Move();
         heroManager.GetHeroMovementManager().Dash();
+        
+        if( Input.GetKeyDown( KeyCode.N ))
+        {
+        skillTree.SetActive( !talentsOpened );
+        talentsOpened = !talentsOpened;
+        }
     }
 
     void FixedUpdate()

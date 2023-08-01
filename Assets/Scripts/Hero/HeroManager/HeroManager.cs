@@ -9,14 +9,17 @@ public class HeroManager : MonoBehaviour
     private HeroMovementManager heroMovementManager;
     private HeroLevelSystemManager heroLevelSystemManager;
     private HeroBasicSpellManager heroBasicSpellManager;
+    private HeroTalentsManager heroTalentsManager;
 
     private void Awake()
     {
-        heroHealthManager = new HeroHealthManager();
+        heroLevelSystemManager = new HeroLevelSystemManager();
+        heroTalentsManager = new HeroTalentsManager();
+        heroHealthManager = new HeroHealthManager( );
         heroManaManager = new HeroManaManager();
         heroMovementManager = new HeroMovementManager();
-        heroLevelSystemManager = new HeroLevelSystemManager();
         heroBasicSpellManager = new HeroBasicSpellManager();
+        ;
     }    
 
     void Start()
@@ -25,6 +28,10 @@ public class HeroManager : MonoBehaviour
         StartCoroutine(heroManaManager.ManaRegen()); 
     }
 
+    public HeroTalentsManager GetHeroTalentsManager()
+    {
+        return heroTalentsManager;
+    }
     public HeroHealthManager GetHeroHealthManager()
     {
         return heroHealthManager;

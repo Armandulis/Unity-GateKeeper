@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static TalentTree;
 
 public class HeroLevelSystemManager
 {
-    private int level;
-    private float experience;
-    private float experienceToNextLevel;
+    private int level = 1;
+    private float experience = 0;
+    private float experienceToNextLevel = 100;
 
     public HeroLevelSystemManager()
     {
         Debug.Log("LevelSystem");
-        level = 0;
+        level = 1;
         experience = 0;
         experienceToNextLevel = 100;
     }
@@ -24,6 +25,9 @@ public class HeroLevelSystemManager
             level++;
             experience -= experienceToNextLevel;
             experienceToNextLevel *= 0.2f;
+
+            talentTree.AddAvailableTalentPoint();
+            talentTree.UpdateAllTalentUI();
         }
         Debug.Log( GetLevel() );
     }

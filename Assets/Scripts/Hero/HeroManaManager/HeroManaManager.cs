@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -12,12 +13,15 @@ public class HeroManaManager
         while (true)
         {
             yield return new WaitForSeconds(1);
-  
+
             currentMana += manaRegen;
             if (currentMana + manaRegen > maxMana)
             {
                 currentMana = maxMana;
             }
+            
+                Debug.Log(maxMana);
+                Debug.Log(manaRegen);
         }
     }
 
@@ -44,5 +48,15 @@ public class HeroManaManager
     public float GetManaPercentage()
     {
         return currentMana / maxMana;
-    } 
+    }
+
+    internal void UpdateStatsForMaximumManaTalentLevel(int currentLevel)
+    {
+        maxMana = maxMana + currentLevel * 100;
+    }
+    
+    internal void UpdateStatsForManaRegenTalentLevel(int currentLevel)
+    {
+        manaRegen = manaRegen + 50;
+    }
 }
