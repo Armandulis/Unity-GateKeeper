@@ -7,6 +7,7 @@ public class Spell : MonoBehaviour
     private HeroManager heroManager;
     private int bounceChangePercentage = 0;
 
+    private float baseHeroSpellDamage = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,13 @@ public class Spell : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if( enemy )
             {
-                enemy.TakeDamage(10);
+                float damage = heroManager.GetHeroManaManager().IncreaseDamageForCurrentMana( 
+                    baseHeroSpellDamage,  
+                    heroManager.GetHeroTalentsManager().moreDamageOnMoreManaLevel, 
+                    heroManager.GetHeroTalentsManager().moreDamageOnLessManaLevel
+                    );
+                enemy.TakeDamage(damage);
+                Debug.Log( "damage done: " + damage);
             }
             else
             {

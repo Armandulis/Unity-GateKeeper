@@ -9,6 +9,7 @@ public class HeroMovementManager
     private float dashDuration = 0.18f;
     private float dashCooldown = 1f;
     private bool isDashing = false;
+    private bool isMoving = false;
     private bool canDash = true;
     private Vector2 position;
 
@@ -21,6 +22,18 @@ public class HeroMovementManager
 
         position.x = Input.GetAxisRaw("Horizontal");
         position.y = Input.GetAxisRaw("Vertical");
+        if(position.x == 0 && position.y == 0 )
+        {
+            isMoving = true;
+        }
+        else{
+            isMoving = false;
+        }
+    }
+
+    public bool IsMoving()
+    {
+        return isMoving || isDashing;
     }
 
     public Vector2 GetCurrentPosition()

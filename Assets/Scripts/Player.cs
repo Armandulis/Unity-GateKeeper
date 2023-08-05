@@ -26,12 +26,15 @@ public class Player : MonoBehaviour
     {
         manaSlider.value = heroManager.GetHeroManaManager().GetManaPercentage();
         heroManager.GetHeroMovementManager().Move();
+        heroManager.GetHeroManaManager().ToggleNotMovingManaRegen(
+            heroManager.GetHeroMovementManager().IsMoving()
+        );
         heroManager.GetHeroMovementManager().Dash();
-        
+
         if( Input.GetKeyDown( KeyCode.N ))
         {
-        skillTree.SetActive( !talentsOpened );
-        talentsOpened = !talentsOpened;
+            skillTree.SetActive( !talentsOpened );
+            talentsOpened = !talentsOpened;
         }
     }
 

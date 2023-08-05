@@ -44,7 +44,6 @@ public class Talent : MonoBehaviour
         talentTree.availableTalentPoints--;
         talentPoint.LevelUp();
         talentTree.UpdateAllTalentUI();
-        Debug.Log("Yep");
     }
 
     public void SetTalentPoint( TalentPoint talentPoint )

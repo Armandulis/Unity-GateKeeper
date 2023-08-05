@@ -31,21 +31,6 @@ public class TalentTree : MonoBehaviour
         availableTalentPoints = heroManager.GetHeroLevelSystemManager().GetLevel();
 
         TalentPoint[] talentPoints = talentsManager.GetManaTalentPoints();
-
-
-
-        // talentLevels = new int[3];
-        // talentCaps = new[] { 10, 2, 1 };
-
-        // talentTitles = new[] { "Manage Regen", "Max Mana", "Refresh Mana" };
-        // talentDescriptions = new[]
-        // {
-        //     "Increase your mana regen by 20",
-        //     "Increase your maximum mana by 20",
-        //     "Gain a skill Refresh your mana"
-        // };
-
-
         foreach( var talent in talentHolder.GetComponentsInChildren<Talent>())
         {
 

@@ -65,7 +65,8 @@ public class Enemy : MonoBehaviour
         {
         
             heroManager.GetHeroLevelSystemManager().AddExperience( experienceWorth );
-            
+            heroManager.GetHeroManaManager().AddManaOnKill();
+
             Destroy(gameObject);
         }
     }

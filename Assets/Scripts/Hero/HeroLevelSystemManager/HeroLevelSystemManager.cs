@@ -11,7 +11,6 @@ public class HeroLevelSystemManager
 
     public HeroLevelSystemManager()
     {
-        Debug.Log("LevelSystem");
         level = 1;
         experience = 0;
         experienceToNextLevel = 100;
@@ -29,7 +28,6 @@ public class HeroLevelSystemManager
             talentTree.AddAvailableTalentPoint();
             talentTree.UpdateAllTalentUI();
         }
-        Debug.Log( GetLevel() );
     }
 
     public int GetLevel()
