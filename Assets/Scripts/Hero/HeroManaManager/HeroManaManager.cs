@@ -10,7 +10,8 @@ public class HeroManaManager
     private int baseManaRegen = 50;
     public int manaOnKill = 0;
     public int manaOnNotMoving = 0;
-    public bool toggleManaNotMoving = true;
+    public bool? toggleManaNotMoving = null;
+    public int manaOnMovingToFix = 0;
 
     public IEnumerator ManaRegen()
     {
@@ -33,11 +34,26 @@ public class HeroManaManager
             return;
         }
 
-        toggleManaNotMoving = isMoving;
+        // Pretend that we are not moving, because if we chose talent while moving, me might run into bugs
+        if( toggleManaNotMoving == null)
+        {
+
+            if( manaOnMovingToFix > 1 && !isMoving )
+            {
+                
+                manaRegen -= manaOnMovingToFix;
+                manaRegen += manaOnNotMoving;
+            }
+             manaOnMovingToFix = 0;
+            toggleManaNotMoving = isMoving;
+            return;
+        } 
         
+        toggleManaNotMoving = isMoving;
         if( isMoving )
         {
             manaRegen -= manaOnNotMoving;
+            
             return;
         }
         
@@ -77,12 +93,13 @@ public class HeroManaManager
     internal void UpdateStatsForManaRegenTalentLevel(int currentLevel)
     {
 
-        manaRegen = baseManaRegen + ( 50 * currentLevel );
+        manaRegen += 50;
     }
 
     internal void UpdateStatsForManaWhenNotMovingTalentLevel(int currentLevel)
     {
-
+        toggleManaNotMoving = null;
+        manaOnMovingToFix = 3 * (currentLevel - 1);
         manaOnNotMoving = ( 3 * currentLevel );
     }
 

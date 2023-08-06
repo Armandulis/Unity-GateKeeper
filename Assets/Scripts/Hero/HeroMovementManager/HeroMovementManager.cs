@@ -24,10 +24,10 @@ public class HeroMovementManager
         position.y = Input.GetAxisRaw("Vertical");
         if(position.x == 0 && position.y == 0 )
         {
-            isMoving = true;
+            isMoving = false;
         }
         else{
-            isMoving = false;
+            isMoving = true;
         }
     }
 
