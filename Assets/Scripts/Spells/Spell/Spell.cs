@@ -28,6 +28,7 @@ public class Spell : MonoBehaviour
                     heroManager.GetHeroTalentsManager().moreDamageOnLessManaLevel
                     );
                 enemy.TakeDamage(damage);
+                heroManager.GetHeroManaManager().AddManaOnEnemyHit();
             }
             else
             {

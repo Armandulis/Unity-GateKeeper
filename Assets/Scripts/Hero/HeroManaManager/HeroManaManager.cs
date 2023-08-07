@@ -9,6 +9,7 @@ public class HeroManaManager
     public int manaRegen = 50;
     public int manaOnKill = 0;
     public int manaOnGettingDamaged = 0;
+    public int manaOnEnemyHit = 0;
     public int manaOnNotMoving = 0;
     public bool? toggleManaNotMoving = null;
     public int manaOnMovingToFix = 0;
@@ -133,7 +134,18 @@ public class HeroManaManager
     }
     public void AddManaOnGettingDamaged()
     {
-        Debug.Log( manaOnGettingDamaged);
         AddMana( manaOnGettingDamaged );
+    }
+
+    internal void UpdateStatsForManaOnEnemyHitTalentLevel(int currentLevel)
+    {
+        
+        manaOnEnemyHit = currentLevel;
+    }
+
+    public void AddManaOnEnemyHit()
+    {
+        Debug.Log("mana on enemy hit : " + manaOnEnemyHit);
+        AddMana( manaOnEnemyHit );
     }
 }
