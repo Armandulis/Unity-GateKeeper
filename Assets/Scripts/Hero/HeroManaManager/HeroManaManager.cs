@@ -7,8 +7,8 @@ public class HeroManaManager
     public float currentMana = 500;
     public float maxMana = 500;
     public int manaRegen = 50;
-    private int baseManaRegen = 50;
     public int manaOnKill = 0;
+    public int manaOnGettingDamaged = 0;
     public int manaOnNotMoving = 0;
     public bool? toggleManaNotMoving = null;
     public int manaOnMovingToFix = 0;
@@ -125,5 +125,15 @@ public class HeroManaManager
         float notMissingManaBonus = ((baseHeroSpellDamage / 100) * currentManaPercentage) * perNotMissingManaLevel * 0.1f;
         float missingManaBonus = (((baseHeroSpellDamage / 100) * ( 100-currentManaPercentage))) * increasePerMissingManaLevel * 0.1f;
         return baseHeroSpellDamage + notMissingManaBonus + missingManaBonus;
+    }
+
+    internal void UpdateStatsForManaOnGettingDamagedTalentLevel(int currentLevel)
+    {
+        manaOnGettingDamaged = currentLevel; 
+    }
+    public void AddManaOnGettingDamaged()
+    {
+        Debug.Log( manaOnGettingDamaged);
+        AddMana( manaOnGettingDamaged );
     }
 }

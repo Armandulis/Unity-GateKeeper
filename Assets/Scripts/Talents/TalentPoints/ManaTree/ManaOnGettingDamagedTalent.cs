@@ -1,15 +1,15 @@
-public class ManaOnKillTalent : TalentPoint
+public class ManaOnGettingDamagedTalent : TalentPoint
 {
     private HeroManager heroManager;
 
-    string id = "ManaOnKill";
+    string id = "ManaOnGettingDamagedTalent";
     int currentLevel = 0;
     int maxLevel = 5;
 
-    public ManaOnKillTalent(HeroManager heroManager)
+    public ManaOnGettingDamagedTalent(HeroManager heroManager)
     {
         this.heroManager = heroManager;
-        currentLevel = heroManager.GetHeroTalentsManager().manaOnKillLevel;
+        currentLevel = heroManager.GetHeroTalentsManager().manaOnGettingDamagedLevel;
     }
     public int GetCurrentTalentPoints()
     {
@@ -18,7 +18,7 @@ public class ManaOnKillTalent : TalentPoint
 
     public string GetDescription()
     {
-        return "Gain " + currentLevel + 1 +" mana on enemy kill";
+        return "Gain " + currentLevel + 1 +" mana on getting damaged";
     }
 
     public int GetMaximumTalentPoints()
@@ -28,14 +28,14 @@ public class ManaOnKillTalent : TalentPoint
 
     public string GetTitle()
     {
-        return "Mana on Kill";
+        return "Mana on losing health";
     }
 
     public int LevelUp()
     {
         if(currentLevel >= maxLevel) return maxLevel;
         currentLevel++;
-        heroManager.GetHeroTalentsManager().manaOnKillLevel++;
+        heroManager.GetHeroTalentsManager().manaOnGettingDamagedLevel++;
         heroManager.GetHeroManaManager().UpdateStatsForManaOnGettingDamagedTalentLevel(currentLevel);
         return currentLevel;
     }

@@ -45,7 +45,8 @@ public class Player : MonoBehaviour
 
     public void PlayerTakeDamage(float damage)
     {
-        heroManager.GetHeroHealthManager().TakeDamage( damage); 
+        heroManager.GetHeroManaManager().AddManaOnGettingDamaged();
+        heroManager.GetHeroHealthManager().TakeDamage(damage); 
         healthSlider.value = heroManager.GetHeroHealthManager().GetHealthPercentage();
     }
 
