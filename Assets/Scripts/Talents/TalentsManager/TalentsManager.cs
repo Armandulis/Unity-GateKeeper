@@ -9,6 +9,7 @@ public class TalentsManager
     private MoreDamageOnLessManaTalent moreDamageOnLessManaTalent;
     private ManaRegenWhenNotMovingTalent manaRegenWhenNotMovingTalent;
     private ManaShieldTalent manaShieldTalent;
+    private ManaRefreshTalent manaRefreshTalent;
 
     public TalentsManager( HeroManager heroManager )
     {
@@ -21,6 +22,7 @@ public class TalentsManager
         manaOnGettingDamagedTalent = new ManaOnGettingDamagedTalent( heroManager );
         manaOnEnemyHitTalent = new ManaOnEnemyHitTalent( heroManager );
         manaShieldTalent = new ManaShieldTalent(heroManager);
+        manaRefreshTalent = new ManaRefreshTalent( heroManager );
     }
 
     public MaximumManaTalent GetMaximumManaTalent()
@@ -69,6 +71,11 @@ public class TalentsManager
         return manaShieldTalent;
     }
 
+    public ManaRefreshTalent GetManaRefreshTalent()
+    {
+        return manaRefreshTalent;
+    }
+
     public TalentPoint[] GetManaTalentPoints()
     {
         return new TalentPoint[] {
@@ -80,7 +87,8 @@ public class TalentsManager
             GetManaRegenWhenNotMovingTalent(),
             GetManaOnGettingDamagedTalent(),
             GetManaOnEnemyHitTalent(),
-            GetManaShieldTalent()       
+            GetManaShieldTalent(),
+            GetManaRefreshTalent()
     };
     }
 }

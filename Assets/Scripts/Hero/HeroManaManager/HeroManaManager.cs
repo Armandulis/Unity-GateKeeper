@@ -6,26 +6,25 @@ public class HeroManaManager
 {
     public float currentMana = 500;
     public float maxMana = 500;
-    public int manaRegen = 50;
-    public int manaOnKill = 0;
-    public int manaOnGettingDamaged = 0;
-    public int manaOnEnemyHit = 0;
-    public int manaOnNotMoving = 0;
+    public float manaRegen = 50;
+    public float manaOnKill = 0;
+    public float manaOnGettingDamaged = 0;
+    public float manaOnEnemyHit = 0;
+    public float manaOnNotMoving = 0;
     public bool? toggleManaNotMoving = null;
-    public int manaOnMovingToFix = 0;
+    public float manaOnMovingToFix = 0;
     private float manaShieldAmount = 0;
     private bool isManaShieldToggled = false;
+    private float refreshManaAmount = 0;
+    private bool canUseRefreshManaTalent = false;
+    private float manaRefreshTalentCooldown = 999;
 
     public IEnumerator ManaRegen()
     {
         while (true)
         {
             yield return new WaitForSeconds(1);
-            currentMana += manaRegen;
-            if (currentMana + manaRegen > maxMana)
-            {
-                currentMana = maxMana;
-            }
+            AddMana(manaRegen);
         }
     }
 
@@ -111,9 +110,13 @@ public class HeroManaManager
         manaOnKill = currentLevel;
     }
 
-    public void AddMana( int manaAmount )
+    public void AddMana( float manaAmount )
     {
         currentMana += manaAmount;
+        if (currentMana + manaAmount > maxMana)
+        {
+            currentMana = maxMana;
+        }
     }
 
     public void AddManaOnKill()
@@ -159,8 +162,6 @@ public class HeroManaManager
         float shieldedAmount = damage * manaShieldAmount;
         if( currentMana >= shieldedAmount )
         {
-            Debug.Log("Shielded amount: " + shieldedAmount);
-            Debug.Log("Damage taken: " + (damage - shieldedAmount));
             UseMana(shieldedAmount);
             return damage - shieldedAmount;
         }
@@ -182,5 +183,34 @@ public class HeroManaManager
     public void ToggleManaShield( bool isToggled )
     {
         isManaShieldToggled = isToggled;
+    }
+
+    internal void UpdateStatsForManaRefreshTalentLevel(float manaAmount, float cooldownInSeconds)
+    {
+        canUseRefreshManaTalent = true;
+        if( manaRefreshTalentCooldown > cooldownInSeconds )
+        {
+            manaRefreshTalentCooldown = cooldownInSeconds;
+        }
+        refreshManaAmount = manaAmount;
+    }
+    public bool CanUseRefreshManaTalent()
+    {
+        return canUseRefreshManaTalent;
+    } 
+
+    public IEnumerator UseRefreshManaTalent()
+    {
+        canUseRefreshManaTalent = false;
+        
+        AddMana( maxMana * refreshManaAmount );
+
+        yield return new WaitForSeconds( manaRefreshTalentCooldown );
+        canUseRefreshManaTalent = true;
+    }
+
+    internal bool IsRefreshManaTalentLearned()
+    {
+        return refreshManaAmount > 0;
     }
 }

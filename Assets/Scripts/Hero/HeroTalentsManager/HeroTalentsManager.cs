@@ -11,4 +11,5 @@ public class HeroTalentsManager
     public int manaRegenWhenNotMovingLevel = 0;
 
     public int manaShieldLevel = 0;
+    public int manaRefreshLevel = 0;
 }

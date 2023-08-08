@@ -36,7 +36,13 @@ public class SpellCastManager : MonoBehaviour
             heroManager.GetHeroManaManager().ToggleManaShield( isManaShieldToggled );
         }
 
-
+        if( Input.GetKeyDown( KeyCode.R ) && heroManager.GetHeroManaManager().IsRefreshManaTalentLearned()  )
+        {
+            if( heroManager.GetHeroManaManager().CanUseRefreshManaTalent() )
+            {
+                StartCoroutine( heroManager.GetHeroManaManager().UseRefreshManaTalent() );
+            }
+        }
     }
 
     private void CastbasicSpell()
