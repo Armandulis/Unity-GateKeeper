@@ -213,4 +213,10 @@ public class HeroManaManager
     {
         return refreshManaAmount > 0;
     }
+
+    internal void UpdateStatsForManaRefreshCooldownTalentLevel(float manaRefreshCD)
+    {
+        canUseRefreshManaTalent = true;
+        manaRefreshTalentCooldown = manaRefreshCD;
+    }
 }

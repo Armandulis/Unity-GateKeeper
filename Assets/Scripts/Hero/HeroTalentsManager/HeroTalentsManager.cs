@@ -12,4 +12,5 @@ public class HeroTalentsManager
 
     public int manaShieldLevel = 0;
     public int manaRefreshLevel = 0;
+    public int manaRefreshCooldownLevel = 0;
 }
