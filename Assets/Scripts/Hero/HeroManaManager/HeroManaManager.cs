@@ -13,13 +13,14 @@ public class HeroManaManager
     public int manaOnNotMoving = 0;
     public bool? toggleManaNotMoving = null;
     public int manaOnMovingToFix = 0;
+    private float manaShieldAmount = 0;
+    private bool isManaShieldToggled = false;
 
     public IEnumerator ManaRegen()
     {
         while (true)
         {
             yield return new WaitForSeconds(1);
-            Debug.Log( "regen" + manaRegen);
             currentMana += manaRegen;
             if (currentMana + manaRegen > maxMana)
             {
@@ -145,7 +146,41 @@ public class HeroManaManager
 
     public void AddManaOnEnemyHit()
     {
-        Debug.Log("mana on enemy hit : " + manaOnEnemyHit);
         AddMana( manaOnEnemyHit );
+    }
+
+    public float CheckManaForHealthModifiers( float damage )
+    {
+        if( manaShieldAmount == 0 || !isManaShieldToggled )
+        {
+            return damage;
+        }
+
+        float shieldedAmount = damage * manaShieldAmount;
+        if( currentMana >= shieldedAmount )
+        {
+            Debug.Log("Shielded amount: " + shieldedAmount);
+            Debug.Log("Damage taken: " + (damage - shieldedAmount));
+            UseMana(shieldedAmount);
+            return damage - shieldedAmount;
+        }
+        
+        // Disable mana shield because we don't have mana for it
+        ToggleManaShield(false);
+        return damage;
+    }
+
+    internal void UpdateStatsForManaShieldTalentLevel(float currentLevel)
+    {
+        manaShieldAmount = currentLevel;
+    }
+
+    internal bool IsManaShieldLearned()
+    {
+        return manaShieldAmount > 0;
+    }
+    public void ToggleManaShield( bool isToggled )
+    {
+        isManaShieldToggled = isToggled;
     }
 }

@@ -9,6 +9,7 @@ public class SpellCastManager : MonoBehaviour
 
     public GameObject boltSpell;
     private float spellSpeed = 10;
+    private bool isManaShieldToggled = false;
 
     private void Start() {
         gameManager = GameManager.instance;
@@ -28,6 +29,14 @@ public class SpellCastManager : MonoBehaviour
             heroManager.GetHeroManaManager().UseMana( 30 );
             CastAOESpell();
         }
+
+        if( Input.GetKeyDown( KeyCode.F ) && heroManager.GetHeroManaManager().IsManaShieldLearned() )
+        {
+            isManaShieldToggled = !isManaShieldToggled; 
+            heroManager.GetHeroManaManager().ToggleManaShield( isManaShieldToggled );
+        }
+
+
     }
 
     private void CastbasicSpell()

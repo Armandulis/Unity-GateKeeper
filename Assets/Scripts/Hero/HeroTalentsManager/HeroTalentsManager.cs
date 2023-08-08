@@ -8,5 +8,7 @@ public class HeroTalentsManager
     public int manaOnGettingDamagedLevel = 0;
     public int moreDamageOnMoreManaLevel = 0;
     public int moreDamageOnLessManaLevel = 0;
-    public int manaRegenWhenNotMovingTalent = 0;
+    public int manaRegenWhenNotMovingLevel = 0;
+
+    public int manaShieldLevel = 0;
 }

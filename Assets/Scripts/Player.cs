@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         heroManager.GetHeroManaManager().ToggleNotMovingManaRegen(
             heroManager.GetHeroMovementManager().IsMoving()
         );
-        heroManager.GetHeroMovementManager().Dash();
 
         if( Input.GetKeyDown( KeyCode.N ))
         {
@@ -45,8 +44,12 @@ public class Player : MonoBehaviour
 
     public void PlayerTakeDamage(float damage)
     {
+        float damageRemainder = heroManager.GetHeroManaManager().CheckManaForHealthModifiers(damage);
+        if( damageRemainder > 0) 
+        {
+            heroManager.GetHeroHealthManager().TakeDamage(damage); 
+        }
         heroManager.GetHeroManaManager().AddManaOnGettingDamaged();
-        heroManager.GetHeroHealthManager().TakeDamage(damage); 
         healthSlider.value = heroManager.GetHeroHealthManager().GetHealthPercentage();
     }
 

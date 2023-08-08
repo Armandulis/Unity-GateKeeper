@@ -10,7 +10,7 @@ public class ManaRegenWhenNotMovingTalent: TalentPoint
     public ManaRegenWhenNotMovingTalent(HeroManager heroManager)
     {
         this.heroManager = heroManager;
-        currentLevel = heroManager.GetHeroTalentsManager().manaRegenWhenNotMovingTalent;
+        currentLevel = heroManager.GetHeroTalentsManager().manaRegenWhenNotMovingLevel;
     }
 
     public int LevelUp()
@@ -18,7 +18,7 @@ public class ManaRegenWhenNotMovingTalent: TalentPoint
 
         if (currentLevel >= maxLevel) return maxLevel;
         currentLevel++;
-        heroManager.GetHeroTalentsManager().manaRegenWhenNotMovingTalent++;
+        heroManager.GetHeroTalentsManager().manaRegenWhenNotMovingLevel++;
         heroManager.GetHeroManaManager().UpdateStatsForManaWhenNotMovingTalentLevel(currentLevel);
         return currentLevel;
     }
