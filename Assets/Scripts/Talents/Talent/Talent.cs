@@ -14,21 +14,38 @@ public class Talent : MonoBehaviour
     public TMP_Text titleText;
     public TMP_Text descriptionText;
 
+    public GameObject tooltip;
+
     public int[] connectedTalents;
 
     // Start is called before the fi rst frame update
     void Start()
     {
-        
+        tooltip.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // tooltip.trasform.position = Input.mousePosition;
     }
 
 
+    void OnMouseOver()
+    {
+        Debug.Log("Mouse is over the GameObject.");
+        tooltip.SetActive(true);
+    }
+    void OnMouseExit()
+{
+    Debug.Log("Mouse has exited the GameObject.");
+    tooltip.SetActive(false);
+}
+
+    public void HideTooltip()
+    {
+        gameObject.SetActive( false);
+    }
     public void UpdateUI()
     {
         titleText.text = talentPoint.GetTitle();
