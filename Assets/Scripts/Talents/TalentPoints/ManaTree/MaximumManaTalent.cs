@@ -48,7 +48,7 @@ public class MaximumManaTalent : TalentPoint
 
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { 1 };
+        return new int[] { 2, 3 };
     }
     
     public int GetMaxLevel()

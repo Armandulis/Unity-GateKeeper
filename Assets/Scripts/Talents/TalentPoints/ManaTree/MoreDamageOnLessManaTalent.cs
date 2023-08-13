@@ -44,7 +44,7 @@
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 6};
     }
     
     public int GetMaxLevel()

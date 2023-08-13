@@ -42,7 +42,7 @@ public class ManaOnEnemyHitTalent : TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 9 };
     }
 
     public int GetMaxLevel()

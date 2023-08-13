@@ -44,7 +44,7 @@ public class ManaRefreshTalent: TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 10 };
     }
     
     public int GetMaxLevel()

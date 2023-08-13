@@ -42,7 +42,7 @@ public class ManaOnKillTalent : TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 5 };
     }
     
     public int GetMaxLevel()

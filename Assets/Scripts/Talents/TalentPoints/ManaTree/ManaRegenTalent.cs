@@ -47,7 +47,7 @@ public class ManaRegenTalent : TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 3,4};
     }
     
     public int GetMaxLevel()

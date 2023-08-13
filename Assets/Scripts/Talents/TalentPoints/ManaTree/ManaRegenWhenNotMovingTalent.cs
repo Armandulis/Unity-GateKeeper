@@ -45,7 +45,7 @@ public class ManaRegenWhenNotMovingTalent: TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 7 };
     }
     
     public int GetMaxLevel()

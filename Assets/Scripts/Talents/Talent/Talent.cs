@@ -12,7 +12,7 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public int id;
     public int test = 0;
     public TalentPoint talentPoint;
-    private bool canLearnTalent = true;
+    private bool? canLearnTalent = null;
 
     public Sprite availableTalentPointsImage;
     public Sprite lockedTalentPointsImage;
@@ -67,7 +67,11 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void SetTalentPointCanLearn( bool canLearn )
     {
-        canLearnTalent = canLearn;
+        if( canLearnTalent == null )
+        {
+            canLearnTalent = false;
+        }
+        canLearnTalent = canLearnTalent == true || canLearn;
     }
 
     public void FixBoarderStatus()
@@ -85,7 +89,7 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
 
 
-        if( talentTree.availableTalentPoints > 0 && canLearnTalent == true )
+        if( talentTree.availableTalentPoints > 0 && (canLearnTalent == true ||  canLearnTalent == null) )
         {
             levelsText.color = Color.green;
           boarder.GetComponent<Image>().sprite = availableTalentPointsImage;
@@ -105,7 +109,7 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void LearnTalent()
     {
 
-        if(talentTree.availableTalentPoints < 1 || talentPoint.GetMaximumTalentPoints() <= talentPoint.GetCurrentTalentPoints() || !canLearnTalent ) return;
+        if(talentTree.availableTalentPoints < 1 || talentPoint.GetMaximumTalentPoints() <= talentPoint.GetCurrentTalentPoints() || canLearnTalent == false ) return;
         talentTree.availableTalentPoints--;
         talentPoint.LevelUp();
         talentTree.UpdateAllTalentUI();

@@ -42,7 +42,7 @@ public class ManaOnGettingDamagedTalent : TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 8 };
     }
 
     
