@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using static TalentTree;
 
-public class Talent : MonoBehaviour
+public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public int id;
@@ -31,21 +32,16 @@ public class Talent : MonoBehaviour
     }
 
 
-    void OnMouseOver()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse is over the GameObject.");
+        tooltip.SetActive( false);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
         tooltip.SetActive(true);
     }
-    void OnMouseExit()
-{
-    Debug.Log("Mouse has exited the GameObject.");
-    tooltip.SetActive(false);
-}
 
-    public void HideTooltip()
-    {
-        gameObject.SetActive( false);
-    }
     public void UpdateUI()
     {
         titleText.text = talentPoint.GetTitle();

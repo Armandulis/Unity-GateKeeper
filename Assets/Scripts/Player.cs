@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
             talentsOpened = !talentsOpened;
         }
     }
-
     void FixedUpdate()
     {
         heroManager.GetHeroMovementManager().updateHeroPosition(myRigidBody);
