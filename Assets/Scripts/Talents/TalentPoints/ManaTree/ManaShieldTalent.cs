@@ -41,4 +41,20 @@ public class ManaShieldTalent: TalentPoint
     {
         return currentLevel;
     }
+    
+    public int[] GetConnectedTalentPoints()
+    {
+        return new int[] { 3 };
+    }
+    
+    public int GetMaxLevel()
+    {
+        return maxLevel;
+    }
+
+    public int GetCurrentLevel()
+    {
+
+        return currentLevel;
+    }
 }

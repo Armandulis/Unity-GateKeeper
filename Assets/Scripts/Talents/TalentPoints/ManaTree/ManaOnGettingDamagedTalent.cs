@@ -39,4 +39,21 @@ public class ManaOnGettingDamagedTalent : TalentPoint
         heroManager.GetHeroManaManager().UpdateStatsForManaOnGettingDamagedTalentLevel(currentLevel);
         return currentLevel;
     }
+    
+    public int[] GetConnectedTalentPoints()
+    {
+        return new int[] { };
+    }
+
+    
+    public int GetMaxLevel()
+    {
+        return maxLevel;
+    }
+
+    public int GetCurrentLevel()
+    {
+
+        return currentLevel;
+    }
 }

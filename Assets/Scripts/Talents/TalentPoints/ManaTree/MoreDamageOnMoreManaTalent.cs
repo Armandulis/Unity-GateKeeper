@@ -41,4 +41,20 @@ public class MoreDamageOnMoreManaTalent: TalentPoint
     {
         return currentLevel;
     }
+    
+    public int[] GetConnectedTalentPoints()
+    {
+        return new int[] { };
+    }
+    
+    public int GetMaxLevel()
+    {
+        return maxLevel;
+    }
+
+    public int GetCurrentLevel()
+    {
+
+        return currentLevel;
+    }
 }

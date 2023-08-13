@@ -10,12 +10,20 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public int id;
+    public int test = 0;
     public TalentPoint talentPoint;
+
+    public Sprite availableTalentPointsImage;
+    public Sprite lockedTalentPointsImage;
+    public Sprite learnedTalentPointsImage;
+    
 
     public TMP_Text titleText;
     public TMP_Text descriptionText;
+    public TMP_Text levelsText;
 
     public GameObject tooltip;
+    public GameObject boarder;
 
     public int[] connectedTalents;
 
@@ -35,7 +43,7 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         tooltip.SetActive( false);
-    }
+    }   
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -44,10 +52,38 @@ public class Talent : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void UpdateUI()
     {
+        foreach(var connectedTalentPoint in talentPoint.GetConnectedTalentPoints() )
+        {
+            talentTree.talentList[ connectedTalentPoint ].gameObject.SetActive( test == 1 ); 
+        }
+
+        test++;
         titleText.text = talentPoint.GetTitle();
         descriptionText.text = talentPoint.GetDescription();
+        levelsText.text = talentPoint.GetCurrentLevel() + "/" + talentPoint.GetMaxLevel();
+        FixBoarderStatus();
+
 
         // GetComponent<Button>().text = talentTree.talentLevels[id] >= talentTree.talentCaps[id] ? Color.yellow : talentTree.talentPoints > 1 ? Color.green : Color.white;
+    }
+
+    public void FixBoarderStatus()
+    {
+        if( talentPoint.GetCurrentLevel() > 0 )
+        {
+          boarder.GetComponent<Image>().sprite = learnedTalentPointsImage;
+
+            if( talentPoint.GetCurrentLevel() == talentPoint.GetMaxLevel() )
+            {
+                return;
+            }
+        }
+
+
+        if( talentTree.availableTalentPoints > 0 )
+        {
+          boarder.GetComponent<Image>().sprite = availableTalentPointsImage;
+        }
     }
 
     public void LearnTalent()
