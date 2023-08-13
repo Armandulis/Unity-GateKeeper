@@ -6,7 +6,6 @@ public class MaximumManaTalent : TalentPoint
     string id = "MaximumManaTalent";
     int currentLevel = 0;
     int maxLevel = 5;
-    public int[] connectedTalentIds = { 3 };
 
 
     public MaximumManaTalent( HeroManager heroManager)
@@ -49,7 +48,7 @@ public class MaximumManaTalent : TalentPoint
 
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { };
+        return new int[] { 1 };
     }
     
     public int GetMaxLevel()

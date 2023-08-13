@@ -54,5 +54,5 @@ public class ManaOnEnemyHitTalent : TalentPoint
     {
 
         return currentLevel;
-    }
+    }   
 }

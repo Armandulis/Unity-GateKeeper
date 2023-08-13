@@ -33,9 +33,7 @@ public class TalentTree : MonoBehaviour
         TalentPoint[] talentPoints = talentsManager.GetManaTalentPoints();
         foreach( var talent in talentHolder.GetComponentsInChildren<Talent>())
         {
-
             talentList.Add(talent);
-
         }
 
         for (var i = 0; i < talentList.Count; i++)
