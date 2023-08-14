@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpellCastManager : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class SpellCastManager : MonoBehaviour
     public GameObject boltSpell;
     private float spellSpeed = 10;
     private bool isManaShieldToggled = false;
+    
+    public GameObject manaRefreshSkillButtonCD;
+    public GameObject manaRefreshSkillButton;
 
     private void Start() {
         gameManager = GameManager.instance;
@@ -36,13 +40,27 @@ public class SpellCastManager : MonoBehaviour
             heroManager.GetHeroManaManager().ToggleManaShield( isManaShieldToggled );
         }
 
+        if( heroManager.GetHeroManaManager().IsRefreshManaTalentLearned() && heroManager.GetHeroManaManager().canUseRefreshManaTalent)
+        {
+            manaRefreshSkillButton.SetActive(true);
+            manaRefreshSkillButtonCD.SetActive(true);
+            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 0;
+        }
+
         if( Input.GetKeyDown( KeyCode.R ) && heroManager.GetHeroManaManager().IsRefreshManaTalentLearned()  )
         {
             if( heroManager.GetHeroManaManager().CanUseRefreshManaTalent() )
             {
                 StartCoroutine( heroManager.GetHeroManaManager().UseRefreshManaTalent() );
+                manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 1;
             }
         }
+        
+        if( !heroManager.GetHeroManaManager().canUseRefreshManaTalent )
+        {
+            
+            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount -= 1 / heroManager.GetHeroManaManager().GetManaRefreshCooldown() * Time.deltaTime;
+        };
     }
 
     private void CastbasicSpell()

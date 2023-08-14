@@ -97,6 +97,6 @@ public class TalentsManager
             GetManaShieldTalent(),
             GetManaRefreshTalent(),
             GetManaRefreshCooldownTalent()
-    };
+        };
     }
 }

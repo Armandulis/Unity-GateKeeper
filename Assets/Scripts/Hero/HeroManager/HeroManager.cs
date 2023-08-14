@@ -19,7 +19,6 @@ public class HeroManager : MonoBehaviour
         heroManaManager = new HeroManaManager();
         heroMovementManager = new HeroMovementManager();
         heroBasicSpellManager = new HeroBasicSpellManager();
-        ;
     }    
 
     void Start()

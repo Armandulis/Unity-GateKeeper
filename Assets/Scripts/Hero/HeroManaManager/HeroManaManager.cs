@@ -16,7 +16,7 @@ public class HeroManaManager
     private float manaShieldAmount = 0;
     private bool isManaShieldToggled = false;
     private float refreshManaAmount = 0;
-    private bool canUseRefreshManaTalent = false;
+    public bool canUseRefreshManaTalent = false;
     private float manaRefreshTalentCooldown = 999;
 
     public IEnumerator ManaRegen()
@@ -218,5 +218,9 @@ public class HeroManaManager
     {
         canUseRefreshManaTalent = true;
         manaRefreshTalentCooldown = manaRefreshCD;
+    }
+    public float GetManaRefreshCooldown()
+    {
+        return manaRefreshTalentCooldown;
     }
 }

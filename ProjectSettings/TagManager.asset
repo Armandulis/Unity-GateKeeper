@@ -13,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Tooltip
   - 
   - 
   - 
@@ -57,4 +57,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 4043507673
+    locked: 0
+  - name: Tooltip
+    uniqueID: 1377933533
     locked: 0

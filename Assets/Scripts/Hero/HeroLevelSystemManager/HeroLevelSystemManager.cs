@@ -11,7 +11,7 @@ public class HeroLevelSystemManager
 
     public HeroLevelSystemManager()
     {
-        level = 1;
+        level = 100;
         experience = 0;
         experienceToNextLevel = 100;
     }
