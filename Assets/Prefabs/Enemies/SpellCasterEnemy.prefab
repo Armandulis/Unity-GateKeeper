@@ -520,7 +520,7 @@ MonoBehaviour:
   healthSlider: {fileID: 656052283}
   healthBar: {fileID: 656052281}
   myRigidBody: {fileID: 5130734999540426978}
-  speed: 1
+  speed: 2
   startedShooting: 0
   boltSpell: {fileID: 1906799557665476407, guid: 981d4dccd3178094eabdb44a1005df83, type: 3}
   maxHealth: 100

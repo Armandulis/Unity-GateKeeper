@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
 {
     
+    private float maxHealth = 100;
+    private float currentHelth = 100;
+    private float speed = 3;
+    
+
+
     public Slider healthSlider;
     public GameObject healthBar;
 
@@ -14,15 +20,11 @@ public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
     private GameObject player;
     
     public Rigidbody2D myRigidBody;
-    public float speed;
 
     public bool startedShooting = false;
 
     public GameObject boltSpell;
 
-    public float maxHealth = 100;
-    public float currentHelth = 100;
-    
     
     // Start is called before the first frame update
     void Start()
@@ -36,27 +38,9 @@ public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
     // Update is called once per frame
     void Update()
     {
+        ChasePlayer();
 
-
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-        if (distance <= 5) {
-            shouldChase = false;
-             myRigidBody.velocity = Vector2.zero;
-            
-            if( !startedShooting )
-            {
-                startedShooting = true;
-                StartCoroutine( CastSpell() );
-            }
-        }
-        else {
-            shouldChase = true;
-            startedShooting = false;
-            Vector2 playerPos = player.transform.position;
-            Vector2 myPosition = transform.position;
-            Vector2 direction = (playerPos - myPosition).normalized;
-            myRigidBody.velocity = direction * speed;
-        }
+   
 
     }
 
@@ -69,6 +53,7 @@ public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
         }
         
             yield return new WaitForSeconds( 1 );
+            
     }
 
         private void CreateBolt( Vector2 directionMain )
@@ -105,5 +90,29 @@ public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
     public int GetCost()
     {
         return 2;
+    }
+
+    public void ChasePlayer()
+    {
+ 
+        float distance = Vector2.Distance(transform.position, player.transform.position);
+        if (distance <= 10) {
+            shouldChase = false;
+             myRigidBody.velocity = Vector2.zero;
+            
+            if( !startedShooting )
+            {
+                startedShooting = true;
+                StartCoroutine( CastSpell() );
+            }
+        }
+        else {
+            shouldChase = true;
+            startedShooting = false;
+            Vector2 playerPos = player.transform.position;
+            Vector2 myPosition = transform.position;
+            Vector2 direction = (playerPos - myPosition).normalized;
+            myRigidBody.velocity = direction * speed;
+        }
     }
 }

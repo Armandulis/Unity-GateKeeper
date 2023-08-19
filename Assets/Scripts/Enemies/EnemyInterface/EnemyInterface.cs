@@ -4,4 +4,5 @@ public interface EnemyInterface
 
     public void TakeDamage(float damage);
     public void CheckDeath();
+    public void ChasePlayer();
 }

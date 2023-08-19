@@ -48,6 +48,9 @@ public class Spell : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        
+        // Debug.Log("HELLO");
     }
 
 

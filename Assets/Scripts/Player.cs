@@ -13,8 +13,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D myRigidBody;
 
     public GameObject skillTree;
+    public GameObject miniMap;    
 
     private bool talentsOpened;
+    private bool miniMapOpened;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,11 @@ public class Player : MonoBehaviour
         {
             skillTree.SetActive( !talentsOpened );
             talentsOpened = !talentsOpened;
+        }
+        if( Input.GetKeyDown( KeyCode.M ))
+        {
+            miniMap.SetActive( !miniMapOpened );
+            miniMapOpened = !miniMapOpened;
         }
     }
     void FixedUpdate()

@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Enemy : MonoBehaviour, EnemyInterface
 {
+    
+    private float maxHealth = 100;
+    private float currentHelth = 100;
+    private float speed = 5;
+
     HeroManager heroManager;
     public Slider healthSlider;
     public GameObject healthBar;
@@ -16,9 +21,6 @@ public class Enemy : MonoBehaviour, EnemyInterface
     public Rigidbody2D myRigidBody;
 
 
-    public float maxHealth = 100;
-    public float currentHelth = 100;
-    public float speed = 5;
 
     public Vector2 colliderSize;
     public Vector2 colliderOffset;
@@ -28,10 +30,7 @@ public class Enemy : MonoBehaviour, EnemyInterface
     public int experienceWorth = 50;
 
 
-    public int GetCost()
-    {
-        return 1;
-    }
+  
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +45,12 @@ public class Enemy : MonoBehaviour, EnemyInterface
         ChasePlayer();
     }
 
-    private void ChasePlayer()
+    public int GetCost()
+    {
+        return 1;
+    }
+
+    public void ChasePlayer()
     {
         if( !coughtPlayer )
         {
