@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpellCasterEnemy : MonoBehaviour
+public class SpellCasterEnemy : MonoBehaviour, EnemyInterface
 {
     
     public Slider healthSlider;
@@ -20,10 +20,9 @@ public class SpellCasterEnemy : MonoBehaviour
 
     public GameObject boltSpell;
 
-
-    
     public float maxHealth = 100;
     public float currentHelth = 100;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -50,14 +49,13 @@ public class SpellCasterEnemy : MonoBehaviour
                 StartCoroutine( CastSpell() );
             }
         }
-        else{
-
+        else {
             shouldChase = true;
             startedShooting = false;
-        Vector2 playerPos = player.transform.position;
-        Vector2 myPosition = transform.position;
-        Vector2 direction = (playerPos - myPosition).normalized;
-        myRigidBody.velocity = direction * speed;
+            Vector2 playerPos = player.transform.position;
+            Vector2 myPosition = transform.position;
+            Vector2 direction = (playerPos - myPosition).normalized;
+            myRigidBody.velocity = direction * speed;
         }
 
     }
@@ -77,7 +75,7 @@ public class SpellCasterEnemy : MonoBehaviour
     {
                 // Create the second spell
                 GameObject createdBoltSpell2 = Instantiate(boltSpell, transform.position, Quaternion.identity);
-                Vector2 direction2 = transform.position; // Add a 10-degree offset to the original direction
+                Vector2 direction2 = transform.position; 
             
                  Vector2 direction = (directionMain - direction2).normalized;
                 createdBoltSpell2.GetComponent<Rigidbody2D>().velocity = direction * 10; // Use a slightly higher speed for the second spell
@@ -94,12 +92,18 @@ public class SpellCasterEnemy : MonoBehaviour
         CheckDeath();
     }
 
-    private void CheckDeath()
+    public void CheckDeath()
     {
         if (currentHelth <= 0)
         {
             // Instantiate(inventory, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
+    }
+
+    
+    public int GetCost()
+    {
+        return 2;
     }
 }

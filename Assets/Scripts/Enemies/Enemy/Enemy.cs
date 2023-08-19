@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, EnemyInterface
 {
     HeroManager heroManager;
     public Slider healthSlider;
@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     public float maxHealth = 100;
     public float currentHelth = 100;
-    public float speed;
+    public float speed = 5;
 
     public Vector2 colliderSize;
     public Vector2 colliderOffset;
@@ -26,6 +26,12 @@ public class Enemy : MonoBehaviour
     private bool coughtPlayer = false;
 
     public int experienceWorth = 50;
+
+
+    public int GetCost()
+    {
+        return 1;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +65,7 @@ public class Enemy : MonoBehaviour
         CheckDeath();
     }
 
-    private void CheckDeath()
+    public void CheckDeath()
     {
         if (currentHelth <= 0)
         {
@@ -110,7 +116,4 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(1);
         coughtPlayer = false;
     }
-
-
-
 }

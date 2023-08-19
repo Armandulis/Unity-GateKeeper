@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public Slider healthSlider;
     public Slider manaSlider;
 
+
     [SerializeField]
     private Rigidbody2D myRigidBody;
 

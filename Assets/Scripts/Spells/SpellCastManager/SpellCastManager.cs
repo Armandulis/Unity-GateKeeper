@@ -14,6 +14,7 @@ public class SpellCastManager : MonoBehaviour
     
     public GameObject manaRefreshSkillButtonCD;
     public GameObject manaRefreshSkillButton;
+    public GameObject manaRefreshSkillKeybind;
 
     private void Start() {
         gameManager = GameManager.instance;
@@ -22,50 +23,93 @@ public class SpellCastManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && heroManager.GetHeroMovementManager().CanDash() )
-        {
-            StartCoroutine( heroManager.GetHeroMovementManager().Dash( ) );
-        }
-        CastbasicSpell();
-        
-        if( Input.GetKeyDown( KeyCode.E ) && heroManager.GetHeroManaManager().IsEnoughMana(30) )
-        {
-            heroManager.GetHeroManaManager().UseMana( 30 );
-            CastAOESpell();
+        // Basic 
+        HandleBasicSpell();
+        HandleBasicAOE();
+
+        // Utility
+        HandleDash();
+
+        // Mana talents
+        HandleManaShield();
+        HandleRefreshMana();
+
+        // Arcane talents
+    }
+
+    public void HandleRefreshMana()
+    {
+        if( !heroManager.GetHeroManaManager().IsRefreshManaTalentLearned() )
+        { 
+            return;
         }
 
-        if( Input.GetKeyDown( KeyCode.F ) && heroManager.GetHeroManaManager().IsManaShieldLearned() )
+        // If we did learn it, but we can't use it, it means it's on cd    
+        if( !heroManager.GetHeroManaManager().canUseRefreshManaTalent )
+        {
+            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount -= 1 / heroManager.GetHeroManaManager().GetManaRefreshCooldown() * Time.deltaTime;
+            return;
+        };
+
+        manaRefreshSkillButton.SetActive(true);
+        manaRefreshSkillButtonCD.SetActive(true);
+        manaRefreshSkillKeybind.SetActive(true);
+        manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 0;
+
+        if( Input.GetKeyDown( KeyCode.R )  )
+        {
+            StartCoroutine( heroManager.GetHeroManaManager().UseRefreshManaTalent() );
+            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 1;
+        }
+
+    }
+    public void HandleManaShield()
+    {
+        if( !heroManager.GetHeroManaManager().IsManaShieldLearned() )
+        {
+            return;
+        }
+
+        if( Input.GetKeyDown( KeyCode.F ) )
         {
             isManaShieldToggled = !isManaShieldToggled; 
             heroManager.GetHeroManaManager().ToggleManaShield( isManaShieldToggled );
         }
-
-        if( heroManager.GetHeroManaManager().IsRefreshManaTalentLearned() && heroManager.GetHeroManaManager().canUseRefreshManaTalent)
-        {
-            manaRefreshSkillButton.SetActive(true);
-            manaRefreshSkillButtonCD.SetActive(true);
-            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 0;
-        }
-
-        if( Input.GetKeyDown( KeyCode.R ) && heroManager.GetHeroManaManager().IsRefreshManaTalentLearned()  )
-        {
-            if( heroManager.GetHeroManaManager().CanUseRefreshManaTalent() )
-            {
-                StartCoroutine( heroManager.GetHeroManaManager().UseRefreshManaTalent() );
-                manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount = 1;
-            }
-        }
-        
-        if( !heroManager.GetHeroManaManager().canUseRefreshManaTalent )
-        {
-            
-            manaRefreshSkillButtonCD.GetComponent<Image>().fillAmount -= 1 / heroManager.GetHeroManaManager().GetManaRefreshCooldown() * Time.deltaTime;
-        };
     }
 
-    private void CastbasicSpell()
+    public void HandleDash()
     {
-        if (Input.GetMouseButtonDown(0) && heroManager.GetHeroManaManager().IsEnoughMana( heroManager.GetHeroBasicSpellManager().GetManaCost() ) )
+        if( !heroManager.GetHeroMovementManager().CanDash())
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(1) )
+        {
+            StartCoroutine( heroManager.GetHeroMovementManager().Dash( ) );
+        }
+    }
+    public void HandleBasicAOE()
+    {
+        if( !heroManager.GetHeroManaManager().IsEnoughMana(30) )
+        {
+            return;
+        }
+        if( Input.GetKeyDown( KeyCode.E ) )
+        {
+            heroManager.GetHeroManaManager().UseMana( 30 );
+            StartCoroutine( CastAOEPart() );
+        }
+    }
+
+    private void HandleBasicSpell()
+    {
+        if( !heroManager.GetHeroManaManager().IsEnoughMana( heroManager.GetHeroBasicSpellManager().GetManaCost() ) )
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(0))
         {
             heroManager.GetHeroManaManager().UseMana( heroManager.GetHeroBasicSpellManager().GetManaCost() );
        
@@ -95,10 +139,6 @@ public class SpellCastManager : MonoBehaviour
             }
         }
 
-    }
-    private void CastAOESpell()
-    {
-        StartCoroutine( CastAOEPart() );
     }
 
     IEnumerator CastAOEPart()

@@ -526,3 +526,4 @@ MonoBehaviour:
   speed: 6
   colliderSize: {x: 1, y: 1}
   colliderOffset: {x: 0, y: 0}
+  experienceWorth: 50
