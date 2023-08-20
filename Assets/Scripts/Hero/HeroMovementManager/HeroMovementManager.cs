@@ -10,7 +10,7 @@ public class HeroMovementManager
     private float dashCooldown = 1f;
     private bool isDashing = false;
     private bool isMoving = false;
-    private bool canDash = true;
+    private bool canDash = false;
     private Vector2 position;
 
     public void Move()
@@ -73,6 +73,16 @@ public class HeroMovementManager
 
 
         yield return new WaitForSeconds( dashCooldown );
+        canDash = true;
+    }
+
+    public void UpdateStatsForDashTalentLevel( int level )
+    {
+        if( level <= 0 )
+        {
+            canDash = false;
+            return;
+        }
         canDash = true;
     }
 }

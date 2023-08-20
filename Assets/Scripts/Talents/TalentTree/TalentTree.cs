@@ -58,6 +58,7 @@ public class TalentTree : MonoBehaviour
             talentList.Add(talent);
         }
         FillInTalentTree( talentPoints );
+        UpdateAllTalentUI();
     }
 
     public void OpenUtilityTree()
@@ -72,6 +73,7 @@ public class TalentTree : MonoBehaviour
         }
 
         FillInTalentTree( talentPoints );
+        UpdateAllTalentUI();
     }
 
     public void FillInTalentTree( TalentPoint[] talentPoints)
@@ -83,8 +85,7 @@ public class TalentTree : MonoBehaviour
     }
 
     public void ResetTalentTreeNodes()
-    {
-        
+    {   
         manaTreeHolder.SetActive( false);
         utilityTreeHolder.SetActive( false );
         talentList.Clear();
