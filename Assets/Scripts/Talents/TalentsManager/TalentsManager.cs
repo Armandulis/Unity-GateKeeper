@@ -99,4 +99,11 @@ public class TalentsManager
             GetManaRefreshCooldownTalent()
         };
     }
+
+    public TalentPoint[] GetUtilityTalentPoints()
+    {
+        return new TalentPoint[] {
+            GetMaximumManaTalent()
+        };
+    }
 }
