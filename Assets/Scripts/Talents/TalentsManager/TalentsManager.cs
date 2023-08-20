@@ -13,6 +13,7 @@ public class TalentsManager
     private ManaRefreshCooldownTalent manaRefreshCooldownTalent;
 
     private DashTalent dashTalent;
+    private DashCooldownTalent dashCooldownTalent;
 
     public TalentsManager( HeroManager heroManager )
     {
@@ -30,6 +31,7 @@ public class TalentsManager
 
 
         dashTalent = new DashTalent(heroManager);
+        dashCooldownTalent = new DashCooldownTalent(heroManager);
     }
 
     public MaximumManaTalent GetMaximumManaTalent()
@@ -88,11 +90,6 @@ public class TalentsManager
         return manaRefreshCooldownTalent;
     }
 
-    public DashTalent GetDashTalent()
-    {
-        return dashTalent;
-    }
-
     public TalentPoint[] GetManaTalentPoints()
     {
         return new TalentPoint[] {
@@ -110,10 +107,23 @@ public class TalentsManager
         };
     }
 
+    
+    public DashTalent GetDashTalent()
+    {
+        return dashTalent;
+    }
+
+    public DashCooldownTalent GetDashCooldownTalent()
+    {
+        return dashCooldownTalent;
+    }
+
     public TalentPoint[] GetUtilityTalentPoints()
     {
         return new TalentPoint[] {
-            GetDashTalent()
+            GetDashTalent(),
+            GetDashCooldownTalent()
+            
         };
     }
 }

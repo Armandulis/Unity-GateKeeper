@@ -1,35 +1,35 @@
-public class DashTalent: TalentPoint
+public class DashCooldownTalent: TalentPoint
 {
     private HeroManager heroManager;
 
-    string id = "DashTalent";
+    string id = "DashCooldownTalent";
     int currentLevel = 0;
-    int maxLevel = 1;
+    int maxLevel = 4;
 
 
-    public DashTalent(HeroManager heroManager)
+    public DashCooldownTalent(HeroManager heroManager)
     {
         this.heroManager = heroManager;
-        currentLevel = heroManager.GetHeroTalentsManager().dashLevel;
+        currentLevel = heroManager.GetHeroTalentsManager().dashCooldownLevel;
     }
 
     public int LevelUp()
     {
         if (currentLevel >= maxLevel) return maxLevel;
         currentLevel++;
-        heroManager.GetHeroTalentsManager().dashLevel++;
-        heroManager.GetHeroMovementManager().UpdateStatsForDashTalentLevel( currentLevel );
+        heroManager.GetHeroTalentsManager().dashCooldownLevel++;
+        heroManager.GetHeroMovementManager().UpdateStatsForDashCooldownTalentLevel( 5 - currentLevel );
         return currentLevel;
     }
 
     public string GetTitle()
     {
-        return "Dash";
+        return "Dash cooldown";
     }
 
     public string GetDescription()
     {
-        return "Learn to dash a small distance" ;
+        return "Reduce dash cooldown by 1 second" ;
     }
 
 
@@ -44,7 +44,7 @@ public class DashTalent: TalentPoint
     
     public int[] GetConnectedTalentPoints()
     {
-        return new int[] { 1 };
+        return new int[] {};
     }
     
     public int GetMaxLevel()

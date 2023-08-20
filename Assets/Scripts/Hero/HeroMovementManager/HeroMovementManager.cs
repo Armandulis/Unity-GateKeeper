@@ -7,7 +7,7 @@ public class HeroMovementManager
     private int baseMovementSpeed = 5;
     private int dashSpeed = 20;
     private float dashDuration = 0.18f;
-    private float dashCooldown = 1f;
+    private float dashCooldown = 5;
     private bool isDashing = false;
     private bool isMoving = false;
     private bool canDash = false;
@@ -84,5 +84,10 @@ public class HeroMovementManager
             return;
         }
         canDash = true;
+    }
+
+    public void UpdateStatsForDashCooldownTalentLevel( float cooldown )
+    {
+        dashCooldown = cooldown;
     }
 }
